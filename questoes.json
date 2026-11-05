@@ -7,6 +7,403 @@
     "enunciado": "Julgue o item: As palavras 'estratégia', 'indivíduo' e 'família' recebem acento gráfico com base na mesma regra fonológica, admitindo a classificação de paroxítonas terminadas em ditongo oral crescente.",
     "opcoes": ["Certo", "Errado"],
     "gabarito": "Certo",
+    "comentario": "Correto! O Cebraspe adota expressamente a doutrina de Evanildo Bechara e Celso Cunha: as palavras com terminação em ditongo crescente podem ser consideradas paroxítonas terminadas em ditongo ou proparoxítonas acidentais/eventuais."
+  },
+  {
+    "id": 2,
+    "moduloId": 1,
+    "banca": "Vunesp",
+    "ano": 2024,
+    "enunciado": "Assinale a alternativa em que todas as palavras estão devidamente acentuadas segundo o Acordo Ortográfico vigente:\n\nA) Idéia, jibóia, herói.\nB) Assembleia, plateia, heróico.\nC) Heroico, assembleia, troféu, pastéis.\nD) Vôo, crêem, leem.",
+    "opcoes": [
+      "A) Idéia, jibóia, herói.",
+      "B) Assembleia, plateia, heróico.",
+      "C) Heroico, assembleia, troféu, pastéis.",
+      "D) Vôo, crêem, leem."
+    ],
+    "gabarito": "C) Heroico, assembleia, troféu, pastéis.",
+    "comentario": "Ditongos abertos éi e ói perderam o acento gráfico nas paroxítonas (heroico, assembleia), mas mantêm em oxítonas e monossílabos (troféu, pastéis). Hiatos 'oo' e 'ee' perderam o circunflexo (voo, creem)."
+  },
+  {
+    "id": 3,
+    "moduloId": 1,
+    "banca": "FGV",
+    "ano": 2023,
+    "enunciado": "Assinale a palavra cuja regra de acentuação gráfica é DIFERENTE da regra aplicada às demais:\n\nA) Próprio.\nB) Cenário.\nC) Juízes.\nD) Memória.",
+    "opcoes": [
+      "A) Próprio.",
+      "B) Cenário.",
+      "C) Juízes.",
+      "D) Memória."
+    ],
+    "gabarito": "C) Juízes.",
+    "comentario": "'Próprio', 'cenário' e 'memória' acentuam-se por serem paroxítonas terminadas em ditongo crescente. Já 'juízes' acentua-se pela regra dos hiatos tônicos (I tónico isolado na sílaba)."
+  },
+  {
+    "id": 4,
+    "moduloId": 1,
+    "banca": "Cebraspe",
+    "ano": 2024,
+    "enunciado": "Julgue o item: O vocábulo 'pôde' mantém o acento gráfico para se diferenciar de 'pode', funcionando como acento diferencial de tempo verbal.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! O acento diferencial foi mantido pelo Novo Acordo Ortográfico para distinguir 'pôde' (pretérito perfeito) de 'pode' (presente do indicativo), assim como em 'pôr' (verbo) e 'por' (preposição)."
+  },
+  {
+    "id": 5,
+    "moduloId": 1,
+    "banca": "FCC",
+    "ano": 2023,
+    "enunciado": "O acento gráfico é obrigatório em todos os vocábulos de qual opção?\n\nA) Ruim, gratuito, pudico.\nB) Rubrica, avaro, interim.\nC) Êxodo, álibi, ínterim.\nD) Filantropo, circuito, item.",
+    "opcoes": [
+      "A) Ruim, gratuito, pudico.",
+      "B) Rubrica, avaro, interim.",
+      "C) Êxodo, álibi, ínterim.",
+      "D) Filantropo, circuito, item."
+    ],
+    "gabarito": "C) Êxodo, álibi, ínterim.",
+    "comentario": "Todas as palavras da opção C são proparoxítonas e, pela regra soberana, 100% das proparoxítonas são acentuadas. Nas demais, 'gratuito', 'pudico', 'rubrica' e 'filantropo' são paroxítonas sem acento."
+  },
+  {
+    "id": 6,
+    "moduloId": 1,
+    "banca": "Cebraspe",
+    "ano": 2023,
+    "enunciado": "Julgue o item: As palavras 'saúde' e 'baú' são acentuadas em decorrência da mesma regra fonológica.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! Ambas são acentuadas pela regra dos hiatos (I ou U tónicos, formando sílaba sozinhos ou com S, não precedidos por ditongo em paroxítonas nem seguidos de NH)."
+  },
+  {
+    "id": 7,
+    "moduloId": 1,
+    "banca": "Vunesp",
+    "ano": 2023,
+    "enunciado": "Em relação à divisão silábica e aos dígrafos, assinale a alternativa com separação correta:\n\nA) Pssi-co-lo-gi-a.\nB) Trans-a-tlân-ti-co.\nC) Sub-es-ti-mar.\nD) Su-bes-ti-mar.",
+    "opcoes": [
+      "A) Pssi-co-lo-gi-a.",
+      "B) Trans-a-tlân-ti-co.",
+      "C) Sub-es-ti-mar.",
+      "D) Su-bes-ti-mar."
+    ],
+    "gabarito": "D) Su-bes-ti-mar.",
+    "comentario": "O prefixo 'sub' seguido de vogal junta-se à vogal seguinte na silabação: su-bes-ti-mar. Nas outras: psi-co-lo-gi-a e tran-sa-tlân-ti-co."
+  },
+  {
+    "id": 8,
+    "moduloId": 1,
+    "banca": "FGV",
+    "ano": 2024,
+    "enunciado": "Assinale a frase em que o emprego do hífen está INCORRETO:\n\nA) Ele tem um perfil anti-inflamatório.\nB) Realizaram um trabalho de micro-ondas.\nC) Foi um ato anti-social grave.\nD) O autoengano prejudicou o aluno.",
+    "opcoes": [
+      "A) Ele tem um perfil anti-inflamatório.",
+      "B) Realizaram um trabalho de micro-ondas.",
+      "C) Foi um ato anti-social grave.",
+      "D) O autoengano prejudicou o aluno."
+    ],
+    "gabarito": "C) Foi um ato anti-social grave.",
+    "comentario": "Quando o prefixo termina em vogal e a segunda palavra começa com R ou S, o hífen é eliminado e a consoante é duplicada: 'antissocial', 'autorretrato', 'microssistema'."
+  },
+  {
+    "id": 9,
+    "moduloId": 1,
+    "banca": "Cebraspe",
+    "ano": 2023,
+    "enunciado": "Julgue o item: Na palavra 'feiura', o acento gráfico foi suprimido em razão do Acordo Ortográfico, visto que a vogal tônica 'u' é precedida de ditongo em palavra paroxítona.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! Perderam o acento os hiatos com I e U tónicos em palavras paroxítonas quando precedidos por ditongo decrescente: feiura, baiuca."
+  },
+  {
+    "id": 10,
+    "moduloId": 1,
+    "banca": "FCC",
+    "ano": 2024,
+    "enunciado": "Assinale a opção com a grafia correta quanto ao emprego de 'por que / por quê / porque / porquê':\n\nA) Não compreendi o porquê de tanta dúvida.\nB) Você se atrasou por que?\nC) Ele não veio por que estava chovendo.\nD) Por quê você não realizou a inscrição?",
+    "opcoes": [
+      "A) Não compreendi o porquê de tanta dúvida.",
+      "B) Você se atrasou por que?",
+      "C) Ele não veio por que estava chovendo.",
+      "D) Por quê você não realizou a inscrição?"
+    ],
+    "gabarito": "A) Não compreendi o porquê de tanta dúvida.",
+    "comentario": "'Porquê' substantivado (precedido por artigo ou pronome) escreve-se junto e com acento circunflexo. Erros: B deveria ser 'por quê' (fim de frase); C deveria ser 'porque' (resposta/causa); D deveria ser 'Por que' (início de pergunta direta)."
+  },
+  {
+    "id": 11,
+    "moduloId": 1,
+    "banca": "Vunesp",
+    "ano": 2024,
+    "enunciado": "Assinale a alternativa em que todos os vocábulos contêm dígrafos consonantais:\n\nA) Chave, piscina, carro.\nB) Bloco, prato, cravo.\nC) Pato, bola, muro.\nD) Flauta, trigo, pedra.",
+    "opcoes": [
+      "A) Chave, piscina, carro.",
+      "B) Bloco, prato, cravo.",
+      "C) Pato, bola, muro.",
+      "D) Flauta, trigo, pedra."
+    ],
+    "gabarito": "A) Chave, piscina, carro.",
+    "comentario": "Em 'chave' (ch), 'piscina' (sc) e 'carro' (rr), temos duas letras que representam um único fonema consonantal (dígrafos). As outras opções apresentam encontros consonantais (duas letras pronunciadas distintamente)."
+  },
+  {
+    "id": 12,
+    "moduloId": 1,
+    "banca": "Cebraspe",
+    "ano": 2023,
+    "enunciado": "Julgue o item: O substantivo 'hífen' recebe acento gráfico pela terminação em -n; seu plural, 'hifens', também deve ser grafado com acento gráfico.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Errado",
+    "comentario": "Errado! 'Hífen' é acentuada por ser paroxítona terminada em N. No plural ('hifens'), a palavra passa a terminar em -ens, regra em que paroxítonas não levam acento (assim como 'itens', 'jovens')."
+  },
+  {
+    "id": 13,
+    "moduloId": 1,
+    "banca": "FGV",
+    "ano": 2023,
+    "enunciado": "Assinale o vocábulo que apresenta hiato e não ditongo:\n\nA) Noite.\nB) Caixa.\nC) Saída.\nD) Causa.",
+    "opcoes": [
+      "A) Noite.",
+      "B) Caixa.",
+      "C) Saída.",
+      "D) Causa."
+    ],
+    "gabarito": "C) Saída.",
+    "comentario": "Em 'sa-í-da', as duas vogais ficam em sílabas separadas (hiato). Em 'noi-te', 'cai-xa' e 'cau-sa', temos vogal + semivogal na mesma sílaba (ditongo decrescente)."
+  },
+  {
+    "id": 14,
+    "moduloId": 1,
+    "banca": "FCC",
+    "ano": 2024,
+    "enunciado": "Quanto à ortografia oficial, assinale a opção inteiramente correta:\n\nA) Pretencioso, paralisia, pesquisa.\nB) Pretensioso, paralisia, pesquisa.\nC) Pretencioso, paralizia, pesquiza.\nD) Pretensioso, paralizia, pesquisa.",
+    "opcoes": [
+      "A) Pretencioso, paralisia, pesquisa.",
+      "B) Pretensioso, paralisia, pesquisa.",
+      "C) Pretencioso, paralizia, pesquiza.",
+      "D) Pretensioso, paralizia, pesquisa."
+    ],
+    "gabarito": "B) Pretensioso, paralisia, pesquisa.",
+    "comentario": "Grafam-se com S: pretensioso (de pretensão), paralisia (e paralisar) e pesquisa (e pesquisar)."
+  },
+  {
+    "id": 15,
+    "moduloId": 1,
+    "banca": "Cebraspe",
+    "ano": 2024,
+    "enunciado": "Julgue o item: A forma verbal 'mantêm' recebe acento circunflexo para assinalar a flexão de plural na terceira pessoa, em oposição à forma singular 'mantém', grafada com acento agudo.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! Verbos derivados de 'ter' e 'vir' (manter, reter, intervir) levam acento agudo no singular da 3ª pessoa ('ele mantém') e acento circunflexo no plural ('eles mantêm')."
+  },
+  {
+    "id": 16,
+    "moduloId": 2,
+    "banca": "FGV",
+    "ano": 2024,
+    "enunciado": "Assinale a opção em que a mudança de posição do adjetivo acarreta alteração substancial de significado:\n\nA) Ele era um homem pobre / Ele era um pobre homem.\nB) Adquiriu um carro novo / Adquiriu um novo carro.\nC) Tomou uma decisão justa / Tomou uma justa decisão.\nD) Realizou uma viagem longa / Realizou uma longa viagem.",
+    "opcoes": [
+      "A) Ele era um homem pobre / Ele era um pobre homem.",
+      "B) Adquiriu um carro novo / Adquiriu um novo carro.",
+      "C) Tomou uma decisão justa / Tomou uma justa decisão.",
+      "D) Realizou uma viagem longa / Realizou uma longa viagem."
+    ],
+    "gabarito": "A) Ele era um homem pobre / Ele era um pobre homem.",
+    "comentario": "'Homem pobre' expressa falta de recursos financeiros (sentido literal/objetivo). 'Pobre homem' exprime infelicidade ou compaixão (sentido conotativo/afetivo)."
+  },
+  {
+    "id": 17,
+    "moduloId": 2,
+    "banca": "Cebraspe",
+    "ano": 2024,
+    "enunciado": "Julgue o item: O pronome demonstrativo 'este' é empregado adequadamente para fazer referência a algo que o próprio emissor acabou de enunciar num trecho anterior do texto.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Errado",
+    "comentario": "Errado! Para retomar termos já expostos anteriormente no texto (função anafórica simples), o pronome correto é 'esse/essa/isso'. O pronome 'este/esta/isto' é usado como catáfora (anunciar o que ainda será dito) ou para o elemento imediatamente mais próximo num par de termos."
+  },
+  {
+    "id": 18,
+    "moduloId": 2,
+    "banca": "FCC",
+    "ano": 2023,
+    "enunciado": "Em relação à classe dos substantivos e suas flexões de gênero, assinale o vocábulo que é classificado como sobrecomum:\n\nA) O cônjuge.\nB) O dentista.\nC) O jacaré.\nD) O gerente.",
+    "opcoes": [
+      "A) O cônjuge.",
+      "B) O dentista.",
+      "C) O jacaré.",
+      "D) O gerente."
+    ],
+    "gabarito": "A) O cônjuge.",
+    "comentario": "'Sobrecomum' possui um único artigo e um único género gramatical para homens e mulheres (o cônjuge, a testemunha, a vítima). 'Dentista' e 'gerente' são comuns de dois géneros (o/a); 'jacaré' é epiceno."
+  },
+  {
+    "id": 19,
+    "moduloId": 2,
+    "banca": "Vunesp",
+    "ano": 2024,
+    "enunciado": "Assinale a alternativa em que o pronome relativo foi empregado em desacordo com a norma-padrão:\n\nA) Esta é a lei a que todos devemos obediência.\nB) O relatório cujo o autor foi promovido já foi homologado.\nC) A cidade onde nasci permanece acolhedora.\nD) Os temas sobre os quais conversamos são essenciais.",
+    "opcoes": [
+      "A) Esta é a lei a que todos devemos obediência.",
+      "B) O relatório cujo o autor foi promovido já foi homologado.",
+      "C) A cidade onde nasci permanece acolhedora.",
+      "D) Os temas sobre os quais conversamos são essenciais."
+    ],
+    "gabarito": "B) O relatório cujo o autor foi promovido já foi homologado.",
+    "comentario": "É terminantemente proibido o uso de artigo definido após o pronome 'cujo' ('cujo o', 'cuja a'). O correto é: 'cujo autor'."
+  },
+  {
+    "id": 20,
+    "moduloId": 2,
+    "banca": "FGV",
+    "ano": 2023,
+    "enunciado": "Considere o adjetivo na expressão 'energia solar'. Trata-se de um 'adjetivo de relação'. É característica desse tipo de adjetivo:\n\nA) Poder ser flexionado no grau superlativo ('muito solar').\nB) Poder ser anteposto ao substantivo ('solar energia').\nC) Derivar semanticamente de um substantivo e não admitir grau.\nD) Possuir valor puramente opinativo do enunciador.",
+    "opcoes": [
+      "A) Poder ser flexionado no grau superlativo ('muito solar').",
+      "B) Poder ser anteposto ao substantivo ('solar energia').",
+      "C) Derivar semanticamente de um substantivo e não admitir grau.",
+      "D) Possuir valor puramente opinativo do enunciador."
+    ],
+    "gabarito": "C) Derivar semanticamente de um substantivo e não admitir grau.",
+    "comentario": "Os adjetivos de relação derivam de substantivos (solar = sol), têm valor objetivo, não admitem anteposição ao nome e não aceitam graus comparativo ou superlativo."
+  },
+  {
+    "id": 21,
+    "moduloId": 2,
+    "banca": "Cebraspe",
+    "ano": 2024,
+    "enunciado": "Julgue o item: Na oração 'Os candidatos leram bastantes páginas do manual', a palavra 'bastantes' funciona como pronome indefinido adjetivo e concorda regularmente com o substantivo 'páginas'.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! Quando 'bastante' acompanha um substantivo com sentido de 'muitos/muitas', funciona como pronome adjetivo e deve flexionar no plural ('bastantes páginas'). Só fica invariável quando atua como advérbio modificador."
+  },
+  {
+    "id": 22,
+    "moduloId": 2,
+    "banca": "FCC",
+    "ano": 2024,
+    "enunciado": "Assinale a alternativa que apresenta o plural correto dos substantivos compostos:\n\nA) Guardas-civis e pés-de-moleque.\nB) Guarda-civis e pé-de-moleques.\nC) Guardas-civil e pés-de-moleques.\nD) Guarda-roupas e segundas-feiras.",
+    "opcoes": [
+      "A) Guardas-civis e pés-de-moleque.",
+      "B) Guarda-civis e pé-de-moleques.",
+      "C) Guardas-civil e pés-de-moleques.",
+      "D) Guarda-roupas e segundas-feiras."
+    ],
+    "gabarito": "A) Guardas-civis e pés-de-moleque.",
+    "comentario": "'Guarda-civil' é composto por substantivo + adjetivo (ambos flexionam: guardas-civis). Em compostos ligados por preposição ('pé de moleque'), apenas o primeiro elemento flexiona no plural (pés de moleque)."
+  },
+  {
+    "id": 23,
+    "moduloId": 2,
+    "banca": "Vunesp",
+    "ano": 2023,
+    "enunciado": "Em 'Apenas um candidato obteve nota máxima', o termo 'um' classifica-se gramaticalmente como:\n\nA) Artigo indefinido.\nB) Pronome demonstrativo.\nC) Numeral cardinal.\nD) Pronome indefinido.",
+    "opcoes": [
+      "A) Artigo indefinido.",
+      "B) Pronome demonstrativo.",
+      "C) Numeral cardinal.",
+      "D) Pronome indefinido."
+    ],
+    "gabarito": "C) Numeral cardinal.",
+    "comentario": "A presença do elemento restritivo 'apenas' enfatiza o valor numérico exato (quantidade estrita de 1 indivíduo), configurando numeral cardinal, e não mero artigo indefinido genérico."
+  },
+  {
+    "id": 24,
+    "moduloId": 2,
+    "banca": "Cebraspe",
+    "ano": 2023,
+    "enunciado": "Julgue o item: Na frase 'Ela mesma protocolou o requerimento', o pronome 'mesma' tem valor reforçador e deve concordar em gênero e número com o sujeito a que se refere.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! Os pronomes 'mesmo(s)' e 'próprio(s)' exercem função adjetiva enfática e concordam obrigatoriamente com o nome ou pronome que intensificam ('ela mesma', 'eles mesmos')."
+  },
+  {
+    "id": 25,
+    "moduloId": 2,
+    "banca": "FGV",
+    "ano": 2024,
+    "enunciado": "Assinale a alternativa em que a palavra sublinhada NÃO possui função adjetiva:\n\nA) As decisões judiciais foram cumpridas.\nB) O trânsito urbano é caótico.\nC) Os policiais agiram rapidamente durante a crise.\nD) O homem cansado recolheu-se cedo.",
+    "opcoes": [
+      "A) As decisões judiciais foram cumpridas.",
+      "B) O trânsito urbano é caótico.",
+      "C) Os policiais agiram rapidamente durante a crise.",
+      "D) O homem cansado recolheu-se cedo."
+    ],
+    "gabarito": "C) Os policiais agiram rapidamente durante a crise.",
+    "comentario": "'Rapidamente' é um advérbio de modo e modifica o verbo 'agiram'. Todas as demais palavras sublinhadas qualificam ou caracterizam substantivos, desempenhando função adjetiva."
+  },
+  {
+    "id": 26,
+    "moduloId": 2,
+    "banca": "FCC",
+    "ano": 2023,
+    "enunciado": "Considere o pronome relativo na oração: 'O local onde ocorreram as provas era ventilado'. O termo 'onde' só pode ser empregado para retomar:\n\nA) Causa.\nB) Lugar físico/espacial.\nC) Tempo histórico.\nD) Ideia abstrata.",
+    "opcoes": [
+      "A) Causa.",
+      "B) Lugar físico/espacial.",
+      "C) Tempo histórico.",
+      "D) Ideia abstrata."
+    ],
+    "gabarito": "B) Lugar físico/espacial.",
+    "comentario": "Na norma culta, o pronome relativo 'onde' tem uso estrito para referências espaciais e lugares físicos. Para tempo, usa-se 'em que / quando'; para situações abstratas, usa-se 'em que / no qual'."
+  },
+  {
+    "id": 27,
+    "moduloId": 2,
+    "banca": "Cebraspe",
+    "ano": 2024,
+    "enunciado": "Julgue o item: Na frase 'Pedro e Paulo são aprovados: este é agente e aquele é escrivão', o pronome 'este' retoma o termo mais próximo citado (Paulo) e 'aquele' retoma o termo mais distante (Pedro).",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! Na retomada anafórica distributiva de dois elementos, 'este(s)' refere-se ao termo citado por último (mais próximo) e 'aquele(s)' ao primeiro termo mencionado (mais distante)."
+  },
+  {
+    "id": 28,
+    "moduloId": 2,
+    "banca": "Vunesp",
+    "ano": 2024,
+    "enunciado": "Assinale a opção em que a classe gramatical da palavra sublinhada foi classificada INCORRETAMENTE:\n\nA) O jantar estava delicioso. (Substantivo)\nB) Vamos jantar cedo hoje. (Verbo)\nC) O aluno estudou muito para o certame. (Pronome)\nD) Comprou muito café no mercado. (Pronome indefinido)",
+    "opcoes": [
+      "A) O jantar estava delicioso. (Substantivo)",
+      "B) Vamos jantar cedo hoje. (Verbo)",
+      "C) O aluno estudou muito para o certame. (Pronome)",
+      "D) Comprou muito café no mercado. (Pronome indefinido)"
+    ],
+    "gabarito": "C) O aluno estudou muito para o certame. (Pronome)",
+    "comentario": "Em C, 'muito' intensifica o verbo 'estudou', portanto classifica-se como advérbio de intensidade, e não pronome."
+  },
+  {
+    "id": 29,
+    "moduloId": 2,
+    "banca": "FGV",
+    "ano": 2023,
+    "enunciado": "Assinale a alternativa em que o substantivo composto forma o plural de modo IDÊNTICO a 'segunda-feira':\n\nA) Beija-flor.\nB) Couve-flor.\nC) Pica-pau.\nD) Guarda-noturno.",
+    "opcoes": [
+      "A) Beija-flor.",
+      "B) Couve-flor.",
+      "C) Pica-pau.",
+      "D) Guarda-noturno."
+    ],
+    "gabarito": "D) Guarda-noturno.",
+    "comentario": "'Segunda-feira' é numeral + substantivo (ambos flexionam: segundas-feiras). 'Guarda-noturno' é substantivo + adjetivo (ambos flexionam: guardas-noturnos). Em 'beija-flor' e 'pica-pau', o primeiro elemento é verbo e fica invariável."
+  },
+  {
+    "id": 30,
+    "moduloId": 2,
+    "banca": "Cebraspe",
+    "ano": 2024,
+    "enunciado": "Julgue o item: No trecho 'Os soldados mostraram-se meio cansados após a marcha', a palavra 'meio' funciona como advérbio de intensidade e, por conseguinte, permanece invariável.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
+    "comentario": "Correto! Quando 'meio' equivale a 'um pouco' e modifica um adjetivo ('cansados'), atua como advérbio e é invariável. Não admite concordância no feminino ('meia cansada' é erro gramatical)."
+  }
+]
+[
+  {
+    "id": 1,
+    "moduloId": 1,
+    "banca": "Cebraspe",
+    "ano": 2024,
+    "enunciado": "Julgue o item: As palavras 'estratégia', 'indivíduo' e 'família' recebem acento gráfico com base na mesma regra fonológica, admitindo a classificação de paroxítonas terminadas em ditongo oral crescente.",
+    "opcoes": ["Certo", "Errado"],
+    "gabarito": "Certo",
     "comentario": "Correto! O Cebraspe admite que paroxítonas terminadas em ditongo crescente também são proparoxítonas acidentais."
   },
   {
