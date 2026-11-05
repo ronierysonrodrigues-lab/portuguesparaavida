@@ -3,146 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GabaritaPortuguês | Plataforma Completa de Estudos</title>
+  <title>GabaritaPortuguês | Plataforma de Estudos</title>
 
-  <!-- Google Fonts & Lucide Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-    :root {
-      --primary: #0284c7;
-      --primary-hover: #0369a1;
-      --primary-light: #e0f2fe;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --success: #10b981;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-    }
-
-    .dark {
-      --primary: #38bdf8;
-      --primary-hover: #0ea5e9;
-      --primary-light: #082f49;
-      --bg: #090d16;
-      --card-bg: #111827;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --border: #1f2937;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: #f8fafc;
+      color: #0f172a;
       line-height: 1.5;
-      transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Layout Geral */
     .container {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 1rem;
     }
 
-    /* Navbar */
+    /* Cabeçalho e Navegação */
     header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-    }
-    .dark header {
-      background: rgba(17, 24, 39, 0.95);
+      z-index: 100;
     }
 
-    .nav-wrapper {
+    .nav-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
-    .brand {
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0284c7;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
       cursor: pointer;
     }
 
-    .brand-icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      background: linear-gradient(135deg, #0284c7, #4f46e5);
-      border-radius: 0.75rem;
+    .nav-menu {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+      gap: 0.35rem;
+      overflow-x: auto;
+      padding: 0.25rem 0;
     }
 
-    .brand-title {
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.025em;
-      background: linear-gradient(90deg, #0284c7, #4f46e5);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .nav-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 600;
+    .nav-item {
+      padding: 0.5rem 0.85rem;
       border-radius: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
       border: none;
       background: transparent;
-      color: var(--text-muted);
+      color: #64748b;
       cursor: pointer;
-      transition: all 0.15s;
+      white-space: nowrap;
+      transition: all 0.2s;
     }
 
-    .nav-btn:hover {
-      color: var(--text);
-      background: rgba(0, 0, 0, 0.04);
+    .nav-item:hover {
+      background: #f1f5f9;
+      color: #0f172a;
     }
 
-    .nav-btn.active {
+    .nav-item.active {
+      background: #e0f2fe;
       color: #0284c7;
-      background: var(--primary-light);
     }
 
-    /* Banner Principal */
-    .hero-banner {
-      background: linear-gradient(135deg, #0284c7 0%, #4338ca 100%);
-      color: #fff;
+    /* Hero Banner */
+    .banner {
+      background: linear-gradient(135deg, #0284c7 0%, #3b82f6 50%, #4f46e5 100%);
       border-radius: 1.25rem;
       padding: 2rem;
+      color: #ffffff;
       margin: 1.5rem 0;
       display: flex;
       flex-direction: column;
@@ -151,196 +102,217 @@
     }
 
     @media (min-width: 640px) {
-      .hero-banner {
+      .banner {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
       }
     }
 
-    .hero-btn {
-      background: #fff;
-      color: #0369a1;
+    .banner h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .banner p {
+      opacity: 0.9;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .banner-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .btn-action {
+      background: #ffffff;
+      color: #0284c7;
       padding: 0.65rem 1.25rem;
       border-radius: 0.75rem;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       font-weight: 700;
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.1s;
-    }
-    .hero-btn:hover {
-      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    /* Cards de Estatísticas */
-    .stats-grid {
+    .btn-action-alt {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    /* Grelha de Estatísticas */
+    .stats-row {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       margin-bottom: 1.5rem;
     }
+
     @media (min-width: 768px) {
-      .stats-grid {
+      .stats-row {
         grid-template-columns: repeat(4, 1fr);
       }
     }
 
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+    .stat-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 1rem;
       padding: 1.25rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
 
-    .stat-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-muted);
-      font-size: 0.75rem;
+    .stat-title {
+      font-size: 0.7rem;
       font-weight: 700;
+      color: #64748b;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .stat-value {
-      font-size: 1.75rem;
+    .stat-number {
+      font-size: 1.8rem;
       font-weight: 800;
-      margin: 0.5rem 0 0.25rem 0;
+      margin: 0.35rem 0 0.15rem 0;
     }
 
-    .stat-sub {
+    .stat-label {
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: #94a3b8;
     }
 
-    /* Grid dos Módulos */
-    .module-grid {
+    /* Módulos */
+    .mod-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.25rem;
-      margin-bottom: 2rem;
     }
+
     @media (min-width: 640px) {
-      .module-grid {
+      .mod-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    @media (min-width: 1024px) {
-      .module-grid {
+
+    @media (min-width: 900px) {
+      .mod-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    .module-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+    .mod-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.25rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.2s;
     }
-    .module-card:hover {
+
+    .mod-card:hover {
       border-color: #0284c7;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.04);
     }
 
-    .badge-tag {
+    .mod-tag {
+      background: #e0f2fe;
+      color: #0284c7;
       font-size: 0.7rem;
       font-weight: 700;
       padding: 0.2rem 0.5rem;
-      border-radius: 0.375rem;
-      background: var(--primary-light);
-      color: #0284c7;
+      border-radius: 0.35rem;
+      display: inline-block;
     }
 
-    /* Modal / Video Player */
-    .modal-overlay {
+    /* Questões */
+    .q-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .q-opt {
+      width: 100%;
+      text-align: left;
+      padding: 0.8rem 1rem;
+      margin-top: 0.5rem;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      border-radius: 0.6rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .q-opt:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .q-opt.correct {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #065f46;
+      font-weight: 700;
+    }
+
+    .q-opt.wrong {
+      background: #fef2f2;
+      border-color: #ef4444;
+      color: #991b1b;
+      font-weight: 700;
+    }
+
+    /* Modal / Janela de Vídeo */
+    .modal {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(4px);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 1rem;
-      z-index: 100;
+      z-index: 200;
     }
-    .modal-overlay.active {
+
+    .modal.active {
       display: flex;
     }
 
-    .modal-window {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+    .modal-box {
+      background: #ffffff;
       border-radius: 1.25rem;
-      max-width: 800px;
       width: 100%;
+      max-width: 760px;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     }
 
-    .video-frame-container {
+    .video-wrap {
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
       background: #000;
     }
-    .video-frame-container iframe {
+
+    .video-wrap iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border: 0;
-    }
-
-    /* Questões */
-    .question-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .opt-btn {
-      width: 100%;
-      text-align: left;
-      padding: 0.85rem 1rem;
-      margin-top: 0.5rem;
-      border-radius: 0.65rem;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .opt-btn:hover {
-      background: var(--primary-light);
-    }
-    .opt-btn.correct {
-      border-color: var(--success);
-      background: #ecfdf5;
-      color: #065f46;
-      font-weight: 600;
-    }
-    .opt-btn.wrong {
-      border-color: var(--danger);
-      background: #fef2f2;
-      color: #991b1b;
-      font-weight: 600;
+      border: none;
     }
 
     .hidden {
@@ -350,197 +322,171 @@
 </head>
 <body>
 
-  <!-- CABEÇALHO -->
+  <!-- NAVEGAÇÃO -->
   <header>
-    <div class="container nav-wrapper">
-      <div class="brand" onclick="mudarSecao('dashboard')">
-        <div class="brand-icon">
-          <i data-lucide="graduation-cap"></i>
-        </div>
-        <div>
-          <span class="brand-title">GabaritaPortuguês</span>
-        </div>
+    <div class="container nav-bar">
+      <div class="logo" onclick="trocarAba('dashboard')">
+        <span>📖 GabaritaPortuguês</span>
       </div>
 
-      <nav class="nav-links">
-        <button onclick="mudarSecao('dashboard')" id="nav-dashboard" class="nav-btn active">
-          <i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i> Dashboard
-        </button>
-        <button onclick="mudarSecao('trilha')" id="nav-trilha" class="nav-btn">
-          <i data-lucide="book-open" style="width:18px;height:18px;"></i> Módulos & Vídeos
-        </button>
-        <button onclick="mudarSecao('questoes')" id="nav-questoes" class="nav-btn">
-          <i data-lucide="check-square" style="width:18px;height:18px;"></i> Questões
-        </button>
-        <button onclick="mudarSecao('erros')" id="nav-erros" class="nav-btn">
-          <i data-lucide="alert-circle" style="width:18px;height:18px;"></i> Caderno de Erros
-        </button>
+      <nav class="nav-menu">
+        <button id="btn-dashboard" class="nav-item active" onclick="trocarAba('dashboard')">Dashboard</button>
+        <button id="btn-trilha" class="nav-item" onclick="trocarAba('trilha')">Módulos & Vídeos</button>
+        <button id="btn-questoes" class="nav-item" onclick="trocarAba('questoes')">Questões</button>
+        <button id="btn-erros" class="nav-item" onclick="trocarAba('erros')">Caderno de Erros</button>
       </nav>
     </div>
   </header>
 
-  <main class="container" style="padding-top: 1rem; padding-bottom: 3rem;">
+  <main class="container" style="padding-bottom: 3rem;">
 
-    <!-- SEÇÃO: DASHBOARD -->
-    <section id="sec-dashboard">
-      <div class="hero-banner">
+    <!-- ABA 1: DASHBOARD -->
+    <div id="view-dashboard">
+      <div class="banner">
         <div>
-          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.025em;">Plataforma de Língua Portuguesa</h1>
-          <p style="opacity: 0.9; font-size: 0.9rem; margin-top: 0.25rem;">Trilha pedagógica com videoaulas integradas do YouTube e resolução comentada.</p>
+          <h1>Plataforma de Língua Portuguesa</h1>
+          <p>Trilha pedagógica com videoaulas integradas do YouTube e resolução comentada.</p>
         </div>
-        <div style="display: flex; gap: 0.5rem;">
-          <button class="hero-btn" onclick="mudarSecao('questoes')">Treinar Questões</button>
-          <button class="hero-btn" style="background: rgba(255,255,255,0.2); color:#fff; border: 1px solid rgba(255,255,255,0.4);" onclick="mudarSecao('trilha')">Ver Aulas</button>
-        </div>
-      </div>
-
-      <!-- CARDS DE ESTATÍSTICA -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-header">Questões Feitas</div>
-          <div class="stat-value" id="count-questoes">0</div>
-          <div class="stat-sub">Respondidas no total</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-header">Taxa de Acerto</div>
-          <div class="stat-value" style="color: #10b981;" id="taxa-acerto">0%</div>
-          <div class="stat-sub" id="detalhe-acertos">0 acertos</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-header">Módulos Concluídos</div>
-          <div class="stat-value" style="color: #6366f1;" id="count-modulos">0 / 12</div>
-          <div class="stat-sub">Trilha concluída</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-header">Caderno de Erros</div>
-          <div class="stat-value" style="color: #ef4444;" id="count-erros">0</div>
-          <div class="stat-sub">Itens para revisar</div>
+        <div class="banner-buttons">
+          <button class="btn-action" onclick="trocarAba('questoes')">Treinar Questões</button>
+          <button class="btn-action btn-action-alt" onclick="trocarAba('trilha')">Ver Aulas</button>
         </div>
       </div>
 
-      <!-- GRÁFICO E PRÓXIMA ETAPA -->
-      <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
-        <div class="stat-card" style="padding: 1.5rem;">
-          <h3 style="font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i data-lucide="bar-chart-2" style="color: #0284c7;"></i> Rendimento por Módulo
-          </h3>
-          <div style="height: 260px; width: 100%;">
-            <canvas id="graficoDesempenho"></canvas>
-          </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-title">Questões Feitas</div>
+          <div class="stat-number" id="dash-total">0</div>
+          <div class="stat-label">Respondidas no total</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-title">Taxa de Acerto</div>
+          <div class="stat-number" style="color: #10b981;" id="dash-taxa">0%</div>
+          <div class="stat-label" id="dash-acertos">0 acertos</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-title">Módulos Concluídos</div>
+          <div class="stat-number" style="color: #4f46e5;" id="dash-modulos">0 / 12</div>
+          <div class="stat-label">Trilha concluída</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-title">Caderno de Erros</div>
+          <div class="stat-number" style="color: #ef4444;" id="dash-erros">0</div>
+          <div class="stat-label">Para revisar</div>
         </div>
       </div>
-    </section>
 
-    <!-- SEÇÃO: TRILHA TEÓRICA -->
-    <section id="sec-trilha" class="hidden">
+      <div class="stat-box" style="padding: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; font-size: 1rem; font-weight: 700;">Rendimento por Módulo</h3>
+        <div style="height: 250px;">
+          <canvas id="grafico"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 2: TRILHA / MÓDULOS -->
+    <div id="view-trilha" class="hidden">
       <div style="margin: 1.5rem 0;">
         <h2 style="font-size: 1.5rem; font-weight: 800;">Trilha Oficial dos Módulos</h2>
-        <p style="color: var(--text-muted); font-size: 0.875rem;">Selecione o módulo para assistir à aula teórica e ver as regras principais.</p>
+        <p style="color: #64748b; font-size: 0.9rem;">Toque no módulo para ver a videoaula e as regras essenciais.</p>
       </div>
 
-      <div class="module-grid" id="grid-modulos"></div>
-    </section>
+      <div class="mod-grid" id="lista-modulos"></div>
+    </div>
 
-    <!-- SEÇÃO: BANCO DE QUESTÕES -->
-    <section id="sec-questoes" class="hidden">
+    <!-- ABA 3: QUESTÕES -->
+    <div id="view-questoes" class="hidden">
       <div style="margin: 1.5rem 0;">
         <h2 style="font-size: 1.5rem; font-weight: 800;">Banco de Questões Comentadas</h2>
-        <p style="color: var(--text-muted); font-size: 0.875rem;">Treine com questões de bancas como Cebraspe, FCC, FGV e Vunesp.</p>
+        <p style="color: #64748b; font-size: 0.9rem;">Treine com foco em bancas examinadoras reais.</p>
       </div>
 
       <div id="lista-questoes"></div>
-    </section>
+    </div>
 
-    <!-- SEÇÃO: CADERNO DE ERROS -->
-    <section id="sec-erros" class="hidden">
+    <!-- ABA 4: CADERNO DE ERROS -->
+    <div id="view-erros" class="hidden">
       <div style="margin: 1.5rem 0; background: #fef2f2; border: 1px solid #fecaca; padding: 1.25rem; border-radius: 1rem;">
-        <h2 style="font-size: 1.25rem; font-weight: 800; color: #991b1b; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="alert-triangle"></i> Caderno de Erros Automatizado
-        </h2>
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: #991b1b;">Caderno de Erros Automatizado</h2>
         <p style="color: #7f1d1d; font-size: 0.85rem; margin-top: 0.25rem;">
-          Questões respondidas incorretamente são armazenadas automaticamente aqui para revisão direcionada.
+          Questões que você errou ficam salvas aqui para você refazer e memorizar.
         </p>
       </div>
 
       <div id="lista-erros"></div>
-    </section>
+    </div>
 
   </main>
 
-  <!-- MODAL DE VÍDEO E TEORIA DO MÓDULO -->
-  <div class="modal-overlay" id="modal-video" onclick="fecharModal(event)">
-    <div class="modal-window" onclick="event.stopPropagation()">
-      <div style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+  <!-- MODAL DE VÍDEO -->
+  <div class="modal" id="modal-video" onclick="fecharVideo(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div style="padding: 1rem 1.25rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
         <div>
-          <span style="font-size: 0.75rem; font-weight: 700; color: #0284c7; text-transform: uppercase;" id="m-mod-num">MÓDULO 01</span>
-          <h3 style="font-weight: 800; font-size: 1.15rem;" id="m-mod-titulo">Fonética</h3>
+          <span class="mod-tag" id="mv-tag">MÓDULO 01</span>
+          <h3 style="font-weight: 800; font-size: 1.1rem; margin-top: 0.25rem;" id="mv-titulo">Título</h3>
         </div>
-        <button onclick="fecharModal()" style="border: none; background: none; cursor: pointer; color: var(--text-muted);">
-          <i data-lucide="x"></i>
-        </button>
+        <button onclick="fecharVideo()" style="border:none; background:none; font-size: 1.5rem; cursor:pointer; color:#64748b;">&times;</button>
       </div>
 
       <div style="overflow-y: auto; padding: 1.25rem; max-height: calc(85vh - 120px);">
-        <!-- Frame do YouTube -->
-        <div class="video-frame-container" id="m-video-container"></div>
-
+        <div class="video-wrap" id="mv-player"></div>
         <div style="margin-top: 1.25rem;">
-          <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Regras de Ouro para a Prova</h4>
-          <ul id="m-regras" style="font-size: 0.875rem; padding-left: 1.25rem; color: var(--text-muted); line-height: 1.7;"></ul>
+          <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Regras de Ouro:</h4>
+          <ul id="mv-regras" style="padding-left: 1.25rem; font-size: 0.85rem; color: #475569; line-height: 1.6;"></ul>
         </div>
       </div>
 
-      <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: #fafafa;">
-        <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
-          <input type="checkbox" id="m-check-concluido" onchange="alternarConclusaoModulo()">
-          Marcar como concluído
+      <div style="padding: 1rem 1.25rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
+        <label style="font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          <input type="checkbox" id="mv-check" onchange="alternarConcluido()"> Marcar módulo como estudado
         </label>
-        <button class="hero-btn" style="padding: 0.5rem 1rem;" onclick="fecharModal()">Concluído</button>
+        <button class="btn-action" onclick="fecharVideo()">Fechar</button>
       </div>
     </div>
   </div>
 
   <script>
-    // 12 Módulos Estruturados com Videoaulas do YouTube
-    const MODULOS = [
-      { id: 1, titulo: "Fonologia & Ortografia Oficial", youtubeId: "mNlO2vE9t9k", regras: ["Proparoxítonas: Todas são acentuadas sem exceção.", "Oxítonas acentuam-se terminadas em A, E, O (s), EM, ENS.", "Ditongos abertos ÉI e ÓI perderam acento em paroxítonas (ideia, jiboia)."] },
-      { id: 2, titulo: "Morfologia I: Classes Nominais", youtubeId: "pA4F3_U46fU", regras: ["Substantivos nomeiam seres; adjetivos caracterizam.", "Pronomes demonstrativos: Este (presente/perto do emissor), Esse (passado recente), Aquele (distante)."] },
-      { id: 3, titulo: "Morfologia II: Tempos e Modos Verbais", youtubeId: "N_1J5Z0Zkcw", regras: ["Futuro do Pretérito: Ação dependente de condição ('Se fizesse, iria').", "Verbos ver e vir no futuro subjuntivo: 'Quando eu vir' (ver) vs 'Quando eu vier' (vir)."] },
-      { id: 4, titulo: "Morfologia III: Conjunções & Conectivos", youtubeId: "e9yZ4w_U58s", regras: ["Concessivas (embora, conquanto) indicam oposição sem anular o fato.", "'Pois' no início da oração é causal/explicativo; após o verbo é conclusivo."] },
-      { id: 5, titulo: "Sintaxe I: Termos da Oração", youtubeId: "7K0Z5P5h7xY", regras: ["O sujeito jamais é preposicionado.", "Haver (sentido de existir) é impessoal e não possui plural ('Havia muitas dúvidas')."] },
-      { id: 6, titulo: "Sintaxe II: Complemento Nominal vs Adjunto", youtubeId: "Qp48sXWk4wM", regras: ["Complemento Nominal completa adjetivos, advérbios e substantivos abstratos com sentido passivo.", "Adjunto Adnominal possui valor ativo de posse."] },
-      { id: 7, titulo: "Sintaxe do Período Composto", youtubeId: "D8_u4kZ8k7A", regras: ["Oração subordinada substantiva pode ser substituída pelo pronome 'ISSO'.", "Oração adjetiva explicativa tem vírgulas; restritiva não tem vírgula."] },
-      { id: 8, titulo: "Concordância Verbal e Nominal", youtubeId: "vB3P8_y57y0", regras: ["Verbo + SE + substantivo sem preposição: Partícula Apassivadora ('Vendem-se casas').", "'Fazer' e 'Haver' indicando tempo são impessoais ('Faz dois anos')."] },
-      { id: 9, titulo: "Regência e Uso da Crase", youtubeId: "Jb-K5lZ1kLk", regras: ["Crase proibida antes de masculino, verbos e pronomes pessoais.", "Crase facultativa antes de nomes femininos, pronomes possessivos femininos singulares e após 'até'."] },
-      { id: 10, titulo: "Pontuação & Emprego da Vírgula", youtubeId: "3e5Qn_Z1l1M", regras: ["Nunca se separa sujeito de predicado por vírgula.", "Adjuntos adverbiais deslocados extensos exigem vírgula obrigatória."] },
-      { id: 11, titulo: "Colocação Pronominal", youtubeId: "6m7j3vU4k9k", regras: ["Não se inicia frase com pronome oblíquo átono na norma culta.", "Palavras negativas e advérbios atraem próclise ('Não me diga')."] },
-      { id: 12, titulo: "Interpretação e Tipologia Textual", youtubeId: "b8gqL_K5m8U", regras: ["Compreensão: Explícito no texto ('Segundo o autor').", "Interpretação: Deduz-se logicamente ('Infere-se do texto')."] }
+    // DADOS DOS 12 MÓDULOS COM AULAS
+    const DADOS_MODULOS = [
+      { id: 1, titulo: "Fonologia & Ortografia Oficial", yt: "mNlO2vE9t9k", regras: ["Todas as proparoxítonas são acentuadas sem exceção.", "Oxítonas acentuam-se terminadas em A, E, O (s), EM, ENS.", "Ditongos abertos ÉI e ÓI perderam acento nas paroxítonas (ideia, jiboia)."] },
+      { id: 2, titulo: "Morfologia I: Classes Nominais", yt: "pA4F3_U46fU", regras: ["Substantivos nomeiam seres; adjetivos atribuem qualidades e restrições.", "Pronomes demonstrativos: 'Este' (presente/perto), 'Esse' (passado recente), 'Aquele' (longe)."] },
+      { id: 3, titulo: "Morfologia II: Tempos e Modos Verbais", yt: "N_1J5Z0Zkcw", regras: ["Futuro do Pretérito: Fatos dependentes de condição ('Se estudasse, passaria').", "Verbos ver e vir: 'Quando eu vir' (ver) vs 'Quando eu vier' (vir)."] },
+      { id: 4, titulo: "Morfologia III: Conjunções & Conectivos", yt: "e9yZ4w_U58s", regras: ["Concessivas (embora, conquanto) estabelecem quebra de expectativa sem anular o fato.", "'Pois' antes do verbo é causal/explicativo; após o verbo é conclusivo."] },
+      { id: 5, titulo: "Sintaxe I: Termos da Oração", yt: "7K0Z5P5h7xY", regras: ["O sujeito nunca vem preposicionado.", "O verbo 'haver' no sentido de existir é impessoal: fica sempre no singular."] },
+      { id: 6, titulo: "Sintaxe II: Complemento Nominal vs Adjunto", yt: "Qp48sXWk4wM", regras: ["Complemento Nominal completa substantivos abstratos, adjetivos e advérbios (valor passivo).", "Adjunto Adnominal possui valor ativo de agente ou posse."] },
+      { id: 7, titulo: "Sintaxe do Período Composto", yt: "D8_u4kZ8k7A", regras: ["Oração substantiva pode ser mentalmente substituída por 'ISSO'.", "Oração adjetiva explicativa vem entre vírgulas; restritiva não tem vírgula."] },
+      { id: 8, titulo: "Concordância Verbal e Nominal", yt: "vB3P8_y57y0", regras: ["Verbo + SE + sujeito sem preposição: Partícula Apassivadora ('Vendem-se casas').", "'Faz' e 'Há' indicando tempo decorrido são impessoais."] },
+      { id: 9, titulo: "Regência e Uso da Crase", yt: "Jb-K5lZ1kLk", regras: ["Proibida crase antes de termos masculinos e verbos.", "Facultativa antes de nomes próprios femininos, possessivos femininos singulares e 'até'."] },
+      { id: 10, titulo: "Pontuação & Emprego da Vírgula", yt: "3e5Qn_Z1l1M", regras: ["Nunca separar o sujeito do verbo por vírgula.", "Adjuntos adverbiais deslocados longos exigem vírgula obrigatória."] },
+      { id: 11, titulo: "Colocação Pronominal", yt: "6m7j3vU4k9k", regras: ["Não se inicia frase na norma culta com pronome oblíquo átono.", "Palavras negativas e advérbios atraem próclise obrigatoriamente."] },
+      { id: 12, titulo: "Interpretação Textual & Tipologia", yt: "b8gqL_K5m8U", regras: ["Compreensão: O que está escrito explicitamente no texto.", "Interpretação: Dedução e inferência lógica autorizada pelo texto."] }
     ];
 
-    const QUESTOES = [
+    const DADOS_QUESTOES = [
       {
         id: 1,
         moduloId: 1,
         banca: "Cebraspe",
         ano: 2024,
-        enunciado: "Julgue o item: As palavras 'estratégia', 'indivíduo' e 'família' são acentuadas pela mesma regra fonológica, admitindo a classificação de paroxítonas terminadas em ditongo oral crescente.",
+        enunciado: "Julgue o item: As palavras 'estratégia', 'indivíduo' e 'família' recebem acento com base na mesma regra fonológica, admitindo a classificação de paroxítonas terminadas em ditongo oral crescente.",
         opcoes: ["Certo", "Errado"],
         gabarito: "Certo",
-        comentario: "Correto! O Cebraspe adota a classificação de que paroxítonas terminadas em ditongo oral crescente também podem ser chamadas de proparoxítonas eventuais."
+        comentario: "Correto! O Cebraspe adota a teoria de que paroxítonas terminadas em ditongo oral crescente também são chamadas de proparoxítonas eventuais."
       },
       {
         id: 2,
         moduloId: 4,
         banca: "FGV",
         ano: 2023,
-        enunciado: "Assinale a frase em que o conector expressa ideia de CONCESSÃO:",
+        enunciado: "Assinale a alternativa em que o termo em destaque expressa sentido de CONCESSÃO:",
         opcoes: [
-          "A) Como a chuva era forte, atrasou o início da prova.",
-          "B) Conquanto houvesse poucas vagas, o candidato não desanimou.",
-          "C) Se você mantiver o ritmo, será aprovado.",
-          "D) Estudou tanto que passou em primeiro lugar."
+          "A) Como choveu copiosamente, a sessão foi cancelada.",
+          "B) Conquanto houvesse poucas vagas, o candidato persistiu nos estudos.",
+          "C) Caso obtenha a nota mínima, será convocado para o teste físico.",
+          "D) Estudou com afinco para que obtivesse êxito na carreira."
         ],
-        gabarito: "B) Conquanto houvesse poucas vagas, o candidato não desanimou.",
+        gabarito: "B) Conquanto houvesse poucas vagas, o candidato persistiu nos estudos.",
         comentario: "'Conquanto' é conjunção subordinativa concessiva por excelência."
       },
       {
@@ -548,15 +494,15 @@
         moduloId: 8,
         banca: "FCC",
         ano: 2023,
-        enunciado: "Assinale a alternativa gramaticalmente correta quanto à concordância:",
+        enunciado: "A concordância verbal e nominal está de acordo com o padrão culto na opção:",
         opcoes: [
-          "A) Devem haver muitas pessoas interessadas no edital.",
-          "B) Tratam-se de processos arquivados pelo relator.",
+          "A) Devem haver muitos candidatos aguardando o resultado oficial.",
+          "B) Tratam-se de processos arquivados pelo magistrado.",
           "C) Alugam-se salas comerciais totalmente equipadas.",
-          "D) Faziam três meses que não publicavam o certame."
+          "D) Faziam dez dias que o laudo pericial não era emitido."
         ],
         gabarito: "C) Alugam-se salas comerciais totalmente equipadas.",
-        comentario: "Na C, 'se' é apassivador e o sujeito passivo são 'salas comerciais' (plural)."
+        comentario: "Na C, a partícula 'se' é apassivadora: salas comerciais são alugadas (concordância no plural correta)."
       }
     ];
 
@@ -564,127 +510,229 @@
       respostas: {},
       concluidos: [],
       erros: [],
-      moduloAberto: null
+      modAtual: null
     };
 
     function carregarDados() {
-      const salvo = localStorage.getItem("gabarita_pt_novo");
+      const salvo = localStorage.getItem("gabarita_pt_estavel");
       if (salvo) {
         try { estado = Object.assign(estado, JSON.parse(salvo)); } catch(e){}
       }
       atualizarDashboard();
-      renderizarTrilha();
+      renderizarModulos();
       renderizarQuestoes();
       renderizarErros();
     }
 
     function salvarDados() {
-      localStorage.setItem("gabarita_pt_novo", JSON.stringify(estado));
+      localStorage.setItem("gabarita_pt_estavel", JSON.stringify(estado));
       atualizarDashboard();
     }
 
-    function mudarSecao(secao) {
-      ['dashboard', 'trilha', 'questoes', 'erros'].forEach(s => {
-        document.getElementById(`sec-${s}`).classList.add('hidden');
-        document.getElementById(`nav-${s}`).classList.remove('active');
+    // ALTERNÂNCIA DE ABAS
+    function trocarAba(abaNome) {
+      const abas = ['dashboard', 'trilha', 'questoes', 'erros'];
+      abas.forEach(a => {
+        const view = document.getElementById('view-' + a);
+        const btn = document.getElementById('btn-' + a);
+        if (view) view.classList.add('hidden');
+        if (btn) btn.classList.remove('active');
       });
-      document.getElementById(`sec-${secao}`).classList.remove('hidden');
-      document.getElementById(`nav-${secao}`).classList.add('active');
+
+      const alvoView = document.getElementById('view-' + abaNome);
+      const alvoBtn = document.getElementById('btn-' + abaNome);
+      if (alvoView) alvoView.classList.remove('hidden');
+      if (alvoBtn) alvoBtn.classList.add('active');
+
+      if (abaNome === 'dashboard') {
+        atualizarGrafico();
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function renderizarTrilha() {
-      const grid = document.getElementById('grid-modulos');
+    function renderizarModulos() {
+      const grid = document.getElementById('lista-modulos');
       grid.innerHTML = '';
 
-      MODULOS.forEach(m => {
+      DADOS_MODULOS.forEach(m => {
         const isDone = estado.concluidos.includes(m.id);
-        const card = document.createElement('div');
-        card.className = 'module-card';
-        card.innerHTML = `
+        const div = document.createElement('div');
+        div.className = 'mod-card';
+        div.innerHTML = `
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span class="badge-tag">MÓDULO ${String(m.id).padStart(2, '0')}</span>
-              <span style="font-size: 0.75rem; color: #ef4444; font-weight: 700; display: flex; align-items: center; gap: 0.25rem;">
-                <i data-lucide="play-circle" style="width:14px;height:14px;"></i> Videoaula
-              </span>
+              <span class="mod-tag">MÓDULO ${String(m.id).padStart(2, '0')}</span>
+              <span style="font-size: 0.75rem; color: #ef4444; font-weight: 700;">▶ Videoaula</span>
             </div>
-            <h3 style="font-weight: 700; font-size: 1rem; margin: 0.25rem 0;">${m.titulo}</h3>
-            <p style="font-size: 0.8rem; color: var(--text-muted);">${m.regras[0]}</p>
+            <h3 style="font-weight: 800; font-size: 1rem; margin: 0.35rem 0;">${m.titulo}</h3>
+            <p style="font-size: 0.8rem; color: #64748b;">${m.regras[0]}</p>
           </div>
-          <div style="margin-top: 1rem; pt: 0.75rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-            <button class="hero-btn" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" onclick="abrirModal(${m.id})">
-              Assistir Aula & Manual
+          <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn-action" style="padding: 0.45rem 0.85rem; font-size: 0.8rem;" onclick="abrirVideo(${m.id})">
+              Ver Aula & Regras
             </button>
             ${isDone ? '<span style="color:#10b981; font-size:0.75rem; font-weight:700;">Concluído</span>' : ''}
           </div>
         `;
-        grid.appendChild(card);
+        grid.appendChild(div);
       });
-      lucide.createIcons();
     }
 
-    function abrirModal(id) {
-      const m = MODULOS.find(item => item.id === id);
+    function abrirVideo(id) {
+      const m = DADOS_MODULOS.find(item => item.id === id);
       if (!m) return;
-      estado.moduloAberto = id;
+      estado.modAtual = id;
 
-      document.getElementById('m-mod-num').innerText = `MÓDULO ${String(m.id).padStart(2, '0')}`;
-      document.getElementById('m-mod-titulo').innerText = m.titulo;
-      document.getElementById('m-check-concluido').checked = estado.concluidos.includes(id);
+      document.getElementById('mv-tag').innerText = `MÓDULO ${String(m.id).padStart(2, '0')}`;
+      document.getElementById('mv-titulo').innerText = m.titulo;
+      document.getElementById('mv-check').checked = estado.concluidos.includes(id);
 
-      document.getElementById('m-video-container').innerHTML = `
-        <iframe src="https://www.youtube.com/embed/${m.youtubeId}?rel=0" allowfullscreen></iframe>
+      document.getElementById('mv-player').innerHTML = `
+        <iframe src="https://www.youtube.com/embed/${m.yt}?autoplay=1&rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       `;
 
-      const ul = document.getElementById('m-regras');
+      const ul = document.getElementById('mv-regras');
       ul.innerHTML = m.regras.map(r => `<li>${r}</li>`).join('');
 
       document.getElementById('modal-video').classList.add('active');
-      lucide.createIcons();
     }
 
-    function fecharModal() {
+    function fecharVideo() {
       document.getElementById('modal-video').classList.remove('active');
-      document.getElementById('m-video-container').innerHTML = ''; // para o som do vídeo
+      document.getElementById('mv-player').innerHTML = ''; // para o vídeo
     }
 
-    function alternarConclusaoModulo() {
-      const id = estado.moduloAberto;
+    function alternarConcluido() {
+      const id = estado.modAtual;
       if (!id) return;
+
       if (estado.concluidos.includes(id)) {
         estado.concluidos = estado.concluidos.filter(item => item !== id);
       } else {
         estado.concluidos.push(id);
       }
       salvarDados();
-      renderizarTrilha();
+      renderizarModulos();
     }
 
     function renderizarQuestoes() {
       const cont = document.getElementById('lista-questoes');
       cont.innerHTML = '';
 
-      QUESTOES.forEach(q => {
+      DADOS_QUESTOES.forEach(q => {
         const resp = estado.respostas[q.id];
         const card = document.createElement('div');
-        card.className = 'question-card';
+        card.className = 'q-card';
 
-        let optsHtml = q.opcoes.map(opt => {
-          let extraClass = '';
+        let opts = q.opcoes.map(opcao => {
+          let extra = '';
           let disabled = resp ? 'disabled' : '';
           if (resp) {
-            if (opt === q.gabarito) extraClass = 'correct';
-            else if (resp.escolha === opt) extraClass = 'wrong';
+            if (opcao === q.gabarito) extra = 'correct';
+            else if (resp.escolha === opcao) extra = 'wrong';
           }
-          return `<button ${disabled} class="opt-btn ${extraClass}" onclick="responder(${q.id}, '${opt.replace(/'/g, "\\'")}')">${opt}</button>`;
+          return `<button ${disabled} class="q-opt ${extra}" onclick="responder(${q.id}, '${opcao.replace(/'/g, "\\'")}')">${opcao}</button>`;
         }).join('');
 
         card.innerHTML = `
-          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.75rem; font-weight: 700;">
-            <span class="badge-tag">${q.banca}</span>
-            <span style="color: var(--text-muted);">${q.ano}</span>
+          <div style="font-size: 0.75rem; font-weight: 700; color: #0284c7; margin-bottom: 0.4rem;">
+            ${q.banca} • ${q.ano}
           </div>
           <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.75rem;">${q.enunciado}</p>
-          <div>${optsHtml}</div>
-          ${resp ? `<div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg); border-radius: 0.5rem; font-size: 0.8rem; border
+          <div>${opts}</div>
+          ${resp ? `<div style="margin-top: 0.85rem; padding: 0.75rem; background: #f8fafc; border-left: 3px solid #0284c7; border-radius: 0.4rem; font-size: 0.85rem;"><strong>Explicação:</strong> ${q.comentario}</div>` : ''}
+        `;
+        cont.appendChild(card);
+      });
+    }
+
+    function responder(id, escolha) {
+      const q = DADOS_QUESTOES.find(item => item.id === id);
+      const acertou = (escolha === q.gabarito);
+      estado.respostas[id] = { escolha, acertou };
+
+      if (!acertou && !estado.erros.includes(id)) {
+        estado.erros.push(id);
+      } else if (acertou) {
+        estado.erros = estado.erros.filter(item => item !== id);
+      }
+
+      salvarDados();
+      renderizarQuestoes();
+      renderizarErros();
+    }
+
+    function renderizarErros() {
+      const cont = document.getElementById('lista-erros');
+      cont.innerHTML = '';
+
+      if (estado.erros.length === 0) {
+        cont.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 2rem;">Nenhum erro registrado por enquanto!</p>';
+        return;
+      }
+
+      const itens = DADOS_QUESTOES.filter(q => estado.erros.includes(q.id));
+      itens.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'q-card';
+        div.innerHTML = `
+          <div style="font-size: 0.75rem; font-weight: 700; color: #ef4444; margin-bottom: 0.4rem;">${q.banca} • Erro para Revisão</div>
+          <p style="font-weight: 600; font-size: 0.95rem;">${q.enunciado}</p>
+          <div style="margin-top: 0.75rem; font-size: 0.85rem; background: #ecfdf5; padding: 0.5rem 0.75rem; border-radius: 0.5rem; color: #065f46;">
+            <strong>Resposta Correta:</strong> ${q.gabarito}
+          </div>
+        `;
+        cont.appendChild(div);
+      });
+    }
+
+    let meuGrafico = null;
+    function atualizarDashboard() {
+      const total = Object.keys(estado.respostas).length;
+      let certas = 0;
+      Object.values(estado.respostas).forEach(r => { if(r.acertou) certas++; });
+
+      const perc = total > 0 ? Math.round((certas / total) * 100) : 0;
+
+      document.getElementById('dash-total').innerText = total;
+      document.getElementById('dash-taxa').innerText = `${perc}%`;
+      document.getElementById('dash-acertos').innerText = `${certas} acertos / ${total - certas} erros`;
+      document.getElementById('dash-modulos').innerText = `${estado.concluidos.length} / 12`;
+      document.getElementById('dash-erros').innerText = estado.erros.length;
+
+      atualizarGrafico();
+    }
+
+    function atualizarGrafico() {
+      const ctx = document.getElementById('grafico');
+      if (!ctx) return;
+
+      if (meuGrafico) meuGrafico.destroy();
+      meuGrafico = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: DADOS_MODULOS.map(m => `M${m.id}`),
+          datasets: [{
+            data: DADOS_MODULOS.map(m => {
+              const qMod = DADOS_QUESTOES.filter(q => q.moduloId === m.id);
+              const r = qMod.filter(q => estado.respostas[q.id]);
+              if (r.length === 0) return 0;
+              return Math.round((r.filter(q => estado.respostas[q.id].acertou).length / r.length) * 100);
+            }),
+            backgroundColor: '#0284c7',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, max: 100 } }
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', carregarDados);
+  </script>
+</body>
+</html>
