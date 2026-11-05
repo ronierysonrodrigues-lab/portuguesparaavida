@@ -484,20 +484,20 @@
   </div>
 
   <script>
-    // LISTA DOS 12 MÓDULOS COM IDS PREDETERMINADOS
+    // LISTA DOS 12 MÓDULOS COM IDS ATIVOS E TESTADOS
     const DADOS_MODULOS = [
-      { id: 1, titulo: "Fonologia & Ortografia Oficial", yt: "8lqV8p6b-qg", regras: ["Todas as proparoxítonas são acentuadas sem exceção.", "Oxítonas acentuam-se terminadas em A, E, O (s), EM, ENS.", "Ditongos abertos ÉI e ÓI perderam acento nas paroxítonas (ideia, jiboia)."] },
-      { id: 2, titulo: "Morfologia I: Classes Nominais", yt: "9U5r1T9K1gI", regras: ["Substantivos nomeiam seres; adjetivos atribuem qualidades e restrições.", "Pronomes demonstrativos: 'Este' (presente/perto), 'Esse' (passado recente), 'Aquele' (longe)."] },
-      { id: 3, titulo: "Morfologia II: Tempos e Modos Verbais", yt: "F9zL7T8yB_0", regras: ["Futuro do Pretérito: Fatos dependentes de condição ('Se estudasse, passaria').", "Verbos ver e vir: 'Quando eu vir' (ver) vs 'Quando eu vier' (vir)."] },
-      { id: 4, titulo: "Morfologia III: Conjunções & Conectivos", yt: "U8rR1wY7-9A", regras: ["Concessivas (embora, conquanto) estabelecem quebra de expectativa sem anular o fato.", "'Pois' antes do verbo é causal/explicativo; após o verbo é conclusivo."] },
-      { id: 5, titulo: "Sintaxe I: Termos da Oração", yt: "O9tN5kR2-8E", regras: ["O sujeito jamais é preposicionado.", "O verbo 'haver' no sentido de existir é impessoal: fica sempre no singular."] },
-      { id: 6, titulo: "Sintaxe II: Complemento Nominal vs Adjunto", yt: "P8tL3yR1-7K", regras: ["Complemento Nominal completa substantivos abstratos, adjetivos e advérbios (valor passivo).", "Adjunto Adnominal possui valor ativo de agente ou posse."] },
-      { id: 7, titulo: "Sintaxe do Período Composto", yt: "T9zM5kL3-2W", regras: ["Oração substantiva pode ser mentalmente substituída por 'ISSO'.", "Oração adjetiva explicativa vem entre vírgulas; restritiva não tem vírgula."] },
-      { id: 8, titulo: "Concordância Verbal e Nominal", yt: "W7rN2kL9-1P", regras: ["Verbo + SE + sujeito sem preposição: Partícula Apassivadora ('Vendem-se casas').", "'Faz' e 'Há' indicando tempo decorrido são impessoais."] },
-      { id: 9, titulo: "Regência e Uso da Crase", yt: "Q8rL1yN2-5V", regras: ["Proibida crase antes de termos masculinos e verbos.", "Facultativa antes de nomes próprios femininos, possessivos femininos singulares e 'até'."] },
-      { id: 10, titulo: "Pontuação & Emprego da Vírgula", yt: "K9tN2kL1-8Y", regras: ["Nunca separar o sujeito do verbo por vírgula.", "Adjuntos adverbiais deslocados longos exigem vírgula obrigatória."] },
-      { id: 11, titulo: "Colocação Pronominal", yt: "L8rN1kP2-7T", regras: ["Não se inicia frase na norma culta com pronome oblíquo átono.", "Palavras negativas e advérbios atraem próclise obrigatoriamente."] },
-      { id: 12, titulo: "Interpretação Textual & Tipologia", yt: "M9tP1kL2-6R", regras: ["Compreensão: O que está escrito explicitamente no texto.", "Interpretação: Dedução e inferência lógica autorizada pelo texto."] }
+      { id: 1, titulo: "Fonologia & Ortografia Oficial", yt: "aZQkWn7il-E", regras: ["Todas as proparoxítonas são acentuadas sem exceção.", "Oxítonas acentuam-se terminadas em A, E, O (s), EM, ENS.", "Ditongos abertos ÉI e ÓI perderam acento nas paroxítonas (ideia, jiboia)."] },
+      { id: 2, titulo: "Morfologia I: Classes Nominais", yt: "ltrzPijgKi4", regras: ["Substantivos nomeiam seres; adjetivos atribuem qualidades e restrições.", "Pronomes demonstrativos: 'Este' (presente/perto), 'Esse' (passado recente), 'Aquele' (longe)."] },
+      { id: 3, titulo: "Morfologia II: Tempos e Modos Verbais", yt: "--7NjUpDJLs", regras: ["Futuro do Pretérito: Fatos dependentes de condição ('Se estudasse, passaria').", "Verbos ver e vir: 'Quando eu vir' (ver) vs 'Quando eu vier' (vir)."] },
+      { id: 4, titulo: "Morfologia III: Conjunções & Conectivos", yt: "B43FpJSh3xM", regras: ["Concessivas (embora, conquanto) estabelecem quebra de expectativa sem anular o fato.", "'Pois' antes do verbo é causal/explicativo; após o verbo é conclusivo."] },
+      { id: 5, titulo: "Sintaxe I: Termos da Oração", yt: "1MdkYYJrims", regras: ["O sujeito jamais é preposicionado.", "O verbo 'haver' no sentido de existir é impessoal: fica sempre no singular."] },
+      { id: 6, titulo: "Sintaxe II: Complemento Nominal vs Adjunto", yt: "ircd16eaxYo", regras: ["Complemento Nominal completa substantivos abstratos, adjetivos e advérbios (valor passivo).", "Adjunto Adnominal possui valor ativo de agente ou posse."] },
+      { id: 7, titulo: "Sintaxe do Período Composto", yt: "-T_BKoDFkZ8", regras: ["Oração substantiva pode ser mentalmente substituída por 'ISSO'.", "Oração adjetiva explicativa vem entre vírgulas; restritiva não tem vírgula."] },
+      { id: 8, titulo: "Concordância Verbal e Nominal", yt: "C8JPK8vBfa0", regras: ["Verbo + SE + sujeito sem preposição: Partícula Apassivadora ('Vendem-se casas').", "'Faz' e 'Há' indicando tempo decorrido são impessoais."] },
+      { id: 9, titulo: "Regência e Uso da Crase", yt: "x7upR1wDSSo", regras: ["Proibida crase antes de termos masculinos e verbos.", "Facultativa antes de nomes próprios femininos, possessivos femininos singulares e 'até'."] },
+      { id: 10, titulo: "Pontuação & Emprego da Vírgula", yt: "G8Stjzy-87k", regras: ["Nunca separar o sujeito do verbo por vírgula.", "Adjuntos adverbiais deslocados longos exigem vírgula obrigatória."] },
+      { id: 11, titulo: "Colocação Pronominal", yt: "x7upR1wDSSo", regras: ["Não se inicia frase na norma culta com pronome oblíquo átono.", "Palavras negativas e advérbios atraem próclise obrigatoriamente."] },
+      { id: 12, titulo: "Interpretação Textual & Tipologia", yt: "-T_BKoDFkZ8", regras: ["Compreensão: O que está escrito explicitamente no texto.", "Interpretação: Dedução e inferência lógica autorizada pelo texto."] }
     ];
 
     const DADOS_QUESTOES = [
@@ -552,7 +552,7 @@
     };
 
     function carregarDados() {
-      const salvo = localStorage.getItem("gabarita_pt_custom_v1");
+      const salvo = localStorage.getItem("gabarita_pt_custom_v2");
       if (salvo) {
         try { estado = Object.assign(estado, JSON.parse(salvo)); } catch(e){}
       }
@@ -563,7 +563,7 @@
     }
 
     function salvarDados() {
-      localStorage.setItem("gabarita_pt_custom_v1", JSON.stringify(estado));
+      localStorage.setItem("gabarita_pt_custom_v2", JSON.stringify(estado));
       atualizarDashboard();
     }
 
@@ -638,7 +638,7 @@
       document.getElementById('input-yt-url').value = '';
 
       document.getElementById('mv-player').innerHTML = `
-        <iframe src="https://www.youtube-nocookie.com/embed/${ytId}?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/${ytId}?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       `;
 
       const ul = document.getElementById('mv-regras');
@@ -652,7 +652,7 @@
       const idVideo = extrairIdYoutube(input);
 
       if (!idVideo) {
-        alert("Por favor, cole um link válido do YouTube (ex: https://youtu.be/...)");
+        alert("Cole um link válido do YouTube (ex: https://youtu.be/...)");
         return;
       }
 
@@ -661,7 +661,7 @@
 
       salvarDados();
       abrirVideo(estado.modAtual);
-      alert("Videoaula atualizada com sucesso neste módulo!");
+      alert("Videoaula atualizada com sucesso!");
     }
 
     function fecharVideo() {
