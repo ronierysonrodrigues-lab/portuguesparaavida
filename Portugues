@@ -1,0 +1,1672 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GabaritaPortuguês | Plataforma Completa para Concursos & Vestibulares</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#082f49',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Estilização suave de Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+    .card-highlight {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-highlight:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('dashboard')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-sky-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+          <i data-lucide="book-marked" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-brand-700 to-sky-500 dark:from-brand-400 dark:to-sky-300 bg-clip-text text-transparent">GabaritaPortuguês</span>
+          <span class="hidden sm:inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 dark:bg-brand-900/40 dark:text-brand-300 ml-1.5 border border-brand-200/50 dark:border-brand-800/50">PRO v2.0</span>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl text-sm font-medium">
+        <button onclick="navigate('dashboard')" id="nav-btn-dashboard" class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 transition-all">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+        </button>
+        <button onclick="navigate('trilha')" id="nav-btn-trilha" class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 transition-all">
+          <i data-lucide="map" class="w-4 h-4"></i> Trilha & Manuais
+        </button>
+        <button onclick="navigate('questoes')" id="nav-btn-questoes" class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 transition-all">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i> Questões & Simulado
+        </button>
+        <button onclick="navigate('caderno-erros')" id="nav-btn-caderno-erros" class="nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 transition-all">
+          <i data-lucide="alert-triangle" class="w-4 h-4"></i> Caderno de Erros
+          <span id="badge-erros-count" class="hidden text-xs bg-rose-500 text-white font-bold px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+      </nav>
+
+      <!-- Right Actions: Streak, Dark Mode, Settings -->
+      <div class="flex items-center gap-2">
+        <!-- Streak badge -->
+        <div class="flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/60 rounded-full text-amber-700 dark:text-amber-400 text-xs font-bold" title="Dias consecutivos estudando">
+          <i data-lucide="flame" class="w-4 h-4 text-amber-500 fill-amber-500 animate-pulse"></i>
+          <span id="streak-counter">1 dia</span>
+        </div>
+
+        <!-- Dark/Light toggle -->
+        <button onclick="toggleDarkMode()" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Alternar tema">
+          <i id="theme-icon" data-lucide="moon" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Backup & Options -->
+        <button onclick="openModal('backup-modal')" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Backup & Opções">
+          <i data-lucide="settings" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Bar -->
+    <div class="flex md:hidden border-t border-slate-200 dark:border-slate-800 px-2 py-1 justify-around text-xs font-semibold">
+      <button onclick="navigate('dashboard')" id="m-nav-btn-dashboard" class="m-nav-tab py-2 px-2 flex flex-col items-center gap-1 text-slate-500">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+      </button>
+      <button onclick="navigate('trilha')" id="m-nav-btn-trilha" class="m-nav-tab py-2 px-2 flex flex-col items-center gap-1 text-slate-500">
+        <i data-lucide="map" class="w-4 h-4"></i> Trilha
+      </button>
+      <button onclick="navigate('questoes')" id="m-nav-btn-questoes" class="m-nav-tab py-2 px-2 flex flex-col items-center gap-1 text-slate-500">
+        <i data-lucide="check-circle-2" class="w-4 h-4"></i> Questões
+      </button>
+      <button onclick="navigate('caderno-erros')" id="m-nav-btn-caderno-erros" class="m-nav-tab py-2 px-2 flex flex-col items-center gap-1 text-slate-500 relative">
+        <i data-lucide="alert-triangle" class="w-4 h-4"></i> Erros
+        <span id="m-badge-erros" class="hidden absolute top-1 right-2 w-2 h-2 rounded-full bg-rose-500"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+    
+    <!-- ==================== TELA 1: DASHBOARD ==================== -->
+    <section id="view-dashboard" class="space-y-6">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-brand-700 via-brand-600 to-sky-600 text-white shadow-xl relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-2xl">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md mb-3">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i> Foco Total em Aprovação
+          </span>
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Rumo ao Gabarito em Português</h1>
+          <p class="mt-2 text-sky-100 text-sm sm:text-base leading-relaxed">
+            Domine a gramática na sequência lógica ideal, treine com questões gabaritadas das principais bancas (Cebraspe, FGV, FCC, Vunesp) e acompanhe seu rendimento tópico por tópico.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <button onclick="navigate('trilha')" class="px-5 py-2.5 bg-white text-brand-700 font-bold text-sm rounded-xl hover:bg-slate-100 transition shadow-md flex items-center gap-2">
+              <i data-lucide="book-open" class="w-4 h-4"></i> Acessar Manuais da Trilha
+            </button>
+            <button onclick="startQuickQuiz()" class="px-5 py-2.5 bg-brand-800/80 hover:bg-brand-900/90 text-white font-semibold text-sm rounded-xl transition border border-white/20 flex items-center gap-2">
+              <i data-lucide="play" class="w-4 h-4"></i> Treino Rápido (5 Questões)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick KPI Cards Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Card 1 -->
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm card-highlight">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider">Questões Feitas</span>
+            <div class="p-2 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+              <i data-lucide="check-square" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold" id="stat-total-resolvidas">0</div>
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">de <span id="stat-banco-total">0</span> cadastradas</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm card-highlight">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider">Taxa de Acerto</span>
+            <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
+              <i data-lucide="pie-chart" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400" id="stat-taxa-acerto">0%</div>
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400"><span id="stat-total-acertos">0</span> acertos / <span id="stat-total-erros">0</span> erros</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm card-highlight">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider">Módulos Concluídos</span>
+            <div class="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold" id="stat-modulos-concluidos">0/12</div>
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">Trilha Pedagógica Integral</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm card-highlight">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider">Erros p/ Revisar</span>
+            <div class="p-2 rounded-xl bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
+              <i data-lucide="alert-octagon" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-rose-600 dark:text-rose-400" id="stat-caderno-erros">0</div>
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400 cursor-pointer hover:underline text-rose-500" onclick="navigate('caderno-erros')">Ver caderno de erros →</div>
+        </div>
+      </div>
+
+      <!-- Charts & Progress Breakdown -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Progress Chart -->
+        <div class="lg:col-span-2 bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold">Rendimento por Módulo Pedagógico</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Taxa percentual de acertos em cada conteúdo</p>
+            </div>
+          </div>
+          <div class="h-64 sm:h-72 w-full">
+            <canvas id="performanceChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Roadmap status summary -->
+        <div class="bg-white dark:bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold mb-1">Status da Trilha</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Seu percurso rumo à fluência normativa</p>
+            
+            <div class="space-y-3" id="dashboard-module-mini-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1">
+              <span>Progresso Global</span>
+              <span id="global-progress-pct">0%</span>
+            </div>
+            <div class="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
+              <div id="global-progress-bar" class="bg-gradient-to-r from-brand-500 to-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ==================== TELA 2: TRILHA & MANUAIS ESQUEMATIZADOS ==================== -->
+    <section id="view-trilha" class="hidden space-y-6">
+      
+      <!-- Cabeçalho da Trilha -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Ordem Didática Gradual</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold mt-0.5">Trilha Pedagógica Completa (12 Módulos)</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Estude primeiro a base (fonética, morfologia) antes de avançar para sintaxe e pontuação.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="trilha-search-input" oninput="filterModules()" placeholder="Buscar conceito ou regra..." class="px-4 py-2 text-sm bg-slate-100 dark:bg-slate-800 rounded-xl border border-transparent focus:border-brand-500 focus:outline-none w-full sm:w-64">
+        </div>
+      </div>
+
+      <!-- Grid dos 12 Módulos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="modules-container">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+
+    <!-- ==================== TELA 3: BANCO DE QUESTÕES & SIMULADO ==================== -->
+    <section id="view-questoes" class="hidden space-y-6">
+
+      <!-- Controle de Filtros & Modo de Teste -->
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="p-2 bg-brand-50 dark:bg-brand-900/30 text-brand-600 rounded-xl"><i data-lucide="filter" class="w-4 h-4"></i></span>
+            <h3 class="font-bold text-sm sm:text-base">Filtros de Treino & Simulados</h3>
+          </div>
+          
+          <!-- Timer de Simulado -->
+          <div id="simulado-timer-box" class="hidden items-center gap-2 px-3.5 py-1.5 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-xl text-rose-600 dark:text-rose-400 text-sm font-mono font-bold">
+            <i data-lucide="timer" class="w-4 h-4 animate-spin"></i>
+            <span id="timer-display">00:00:00</span>
+            <button onclick="stopSimuladoTimer()" class="text-xs underline ml-2">Finalizar</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+          <!-- Filtro Assunto -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">Módulo / Conteúdo</label>
+            <select id="filter-module" onchange="applyQuestionFilters()" class="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-3 py-2 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none">
+              <option value="all">Todos os 12 Módulos</option>
+              <!-- Populated dynamic -->
+            </select>
+          </div>
+
+          <!-- Filtro Banca -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">Banca Examinadora</label>
+            <select id="filter-banca" onchange="applyQuestionFilters()" class="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-3 py-2 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none">
+              <option value="all">Todas as Bancas</option>
+              <option value="Cebraspe">Cebraspe / Cesp</option>
+              <option value="FGV">FGV</option>
+              <option value="FCC">FCC</option>
+              <option value="Vunesp">Vunesp</option>
+              <option value="ENEM">ENEM / Vestibulares</option>
+            </select>
+          </div>
+
+          <!-- Filtro Status -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">Status da Questão</label>
+            <select id="filter-status" onchange="applyQuestionFilters()" class="w-full bg-slate-100 dark:bg-slate-800 rounded-xl px-3 py-2 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none">
+              <option value="all">Todas (Respondidas e Não)</option>
+              <option value="unanswered">Apenas Não Respondidas</option>
+              <option value="correct">Apenas Acertos</option>
+              <option value="wrong">Apenas Erros</option>
+            </select>
+          </div>
+
+          <!-- Ação Simulado Rápido -->
+          <div class="flex items-end gap-2">
+            <button onclick="startTimedSimulado()" class="w-full py-2 px-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-xs sm:text-sm flex items-center justify-center gap-1.5 transition">
+              <i data-lucide="play-circle" class="w-4 h-4"></i> Simulado Cronometrado
+            </button>
+            <button onclick="resetFilters()" class="p-2 bg-slate-200 dark:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-300" title="Limpar Filtros">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
+          <span>Exibindo <b id="filtered-count" class="text-brand-600 dark:text-brand-400">0</b> questões correspondentes.</span>
+          <span class="text-[11px]">Resoluções comentadas alternativa por alternativa.</span>
+        </div>
+      </div>
+
+      <!-- Lista de Questões -->
+      <div id="questions-list" class="space-y-6">
+        <!-- Inseridas dinamicamente -->
+      </div>
+    </section>
+
+
+    <!-- ==================== TELA 4: CADERNO DE ERROS ==================== -->
+    <section id="view-caderno-erros" class="hidden space-y-6">
+      
+      <div class="bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/60 p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-bold text-sm">
+            <i data-lucide="alert-octagon" class="w-5 h-5"></i> Caderno de Erros Automatizado
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-1">Onde Mora a Sua Aprovação</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-1 max-w-2xl">
+            As bancas repetem as mesmas pegadinhas. Revise com atenção redobrada cada questão que você errou até convertê-la em acerto definitivo.
+          </p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="limparCadernoErros()" class="px-4 py-2 text-xs font-semibold bg-white dark:bg-slate-900 text-rose-600 border border-rose-200 dark:border-rose-800 rounded-xl hover:bg-rose-100/40 transition">
+            Limpar Registro de Erros
+          </button>
+        </div>
+      </div>
+
+      <!-- Container das questões erradas -->
+      <div id="erros-container" class="space-y-6">
+        <!-- Inserido dinamicamente -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE LEITURA DO MANUAL ESQUEMATIZADO -->
+  <div id="manual-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-800/40">
+        <div class="flex items-center gap-3">
+          <div id="modal-mod-icon" class="p-2.5 rounded-2xl bg-brand-600 text-white shadow-md">
+            <i data-lucide="book" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span id="modal-mod-badge" class="text-xs font-extrabold uppercase text-brand-600 dark:text-brand-400">Módulo 1</span>
+            <h3 id="modal-mod-title" class="text-lg sm:text-xl font-bold">Título do Módulo</h3>
+          </div>
+        </div>
+        <button onclick="closeModal('manual-modal')" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Content Area -->
+      <div id="modal-mod-content" class="p-6 sm:p-8 overflow-y-auto space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+        <!-- Render dinâmico com bizus e pegadinhas de bancas -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 flex flex-wrap items-center justify-between gap-3">
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" id="modal-check-completed" onchange="toggleModuleCompletionFromModal()" class="w-4 h-4 rounded text-brand-600 focus:ring-brand-500">
+          <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Marcar este módulo como estudado</span>
+        </label>
+        <button onclick="irParaQuestoesDoModulo()" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition">
+          <i data-lucide="check-circle" class="w-4 h-4"></i> Praticar Questões deste Tópico
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE BACKUP E CONFIGURAÇÕES -->
+  <div id="backup-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between">
+        <h3 class="font-extrabold text-lg flex items-center gap-2">
+          <i data-lucide="sliders" class="w-5 h-5 text-brand-600"></i> Gestão de Dados & Backup
+        </h3>
+        <button onclick="closeModal('backup-modal')" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-500 dark:text-slate-400">
+        Todo o seu progresso, acertos, histórico e anotações ficam salvos localmente no seu navegador via LocalStorage. Você pode salvar um arquivo JSON ou restaurá-lo em outro computador.
+      </p>
+
+      <div class="space-y-2.5">
+        <button onclick="exportDataJSON()" class="w-full py-2.5 px-4 bg-brand-50 dark:bg-brand-950/40 text-brand-600 dark:text-brand-300 border border-brand-200 dark:border-brand-800 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-100 transition">
+          <i data-lucide="download" class="w-4 h-4"></i> Exportar Progresso (Download .JSON)
+        </button>
+
+        <label class="w-full py-2.5 px-4 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i data-lucide="upload" class="w-4 h-4"></i> Importar Progresso de Arquivo JSON
+          <input type="file" id="json-file-input" onchange="importDataJSON(event)" accept=".json" class="hidden">
+        </label>
+      </div>
+
+      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+        <button onclick="resetAllProgress()" class="text-xs font-semibold text-rose-500 hover:text-rose-700 flex items-center gap-1">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Redefinir Todo o Histórico
+        </button>
+        <button onclick="closeModal('backup-modal')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 rounded-xl text-xs font-bold">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm font-semibold">
+    <i id="toast-icon" data-lucide="info" class="w-4 h-4 text-brand-400"></i>
+    <span id="toast-msg">Mensagem</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC & CONTENT REPOSITORY -->
+  <script>
+    /* =====================================================================
+       1. BASE DE CONTEÚDO PEDAGÓGICO: 12 MÓDULOS ESQUEMATIZADOS
+       ===================================================================== */
+    const MODULES = [
+      {
+        id: 1,
+        title: "Fonologia, Acentuação & Novo Acordo",
+        desc: "Dígrafos vs encontros consonantais, oxítonas, paroxítonas, proparoxítonas, hiatos e trema.",
+        badge: "Fundamentos",
+        bancaHighlight: "Cebraspe adora justificar palavras diferentes pela MESMA regra (ex: 'história' e 'país' -> Errado!).",
+        summaryHtml: `
+          <div class="space-y-4">
+            <div class="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-2xl border-l-4 border-brand-500">
+              <h4 class="font-bold text-brand-700 dark:text-brand-300 text-base">Regras Essenciais de Acentuação</h4>
+              <p class="text-xs mt-1 text-slate-600 dark:text-slate-300">Todas as proparoxítonas são acentuadas (médico, lâmpada). Oxítonas: acentuam-se terminadas em A, E, O (seguidos ou não de S), EM, ENS. Paroxítonas: acentuam-se as que NÃO terminam nessas terminações das oxítonas.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <h5 class="font-bold text-xs uppercase tracking-wide text-brand-600 dark:text-brand-400">Regra do Hiato (I e U)</h5>
+                <p class="text-xs mt-1">Acentua-se o <b>I</b> e <b>U</b> tônicos sozinhos na sílaba ou com S: <i>sa-ú-de, fa-ís-ca</i>. <b>Atenção:</b> Se seguido de NH não leva acento (<i>ra-i-nha</i>). Paroxítonas com ditongo antes perdem acento: <i>fei-u-ra, bo-i-u-na</i>.</p>
+              </div>
+              <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <h5 class="font-bold text-xs uppercase tracking-wide text-amber-600 dark:text-amber-400">Novo Acordo Ortográfico</h5>
+                <p class="text-xs mt-1">Fim do acento nos ditongos abertos <b>EI</b> e <b>OI</b> das <b>paroxítonas</b> (<i>i-dei-a, ji-boi-a</i>). Mas as <b>oxítonas mantêm</b> (<i>he-rói, pas-téis</i>). Fim do acento em <i>vôo/voo, crêem/creem</i>.</p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800">
+              <h5 class="font-bold text-amber-800 dark:text-amber-300 text-xs uppercase flex items-center gap-1.5">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i> BIZU DE PROVA (Paroxítona Eventual / Proparoxítona Aparente)
+              </h5>
+              <p class="text-xs mt-1 text-slate-700 dark:text-slate-300">
+                Palavras como <b>história, memória, série</b> terminam em ditongo crescente ou hiato. As bancas (FGV e Cebraspe) aceitam duas classificações: <i>Paroxítona terminada em ditongo crescente</i> OU <i>Proparoxítona aparente/eventual</i>. Fique atento ao enunciado!
+              </p>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 2,
+        title: "Estrutura e Formação de Palavras",
+        desc: "Radicais, afixos, derivação prefixal, sufixal, parassintética, regressiva e imprópria.",
+        badge: "Morfologia Básica",
+        bancaHighlight: "FGV ama cobrar derivação regressiva (deverbais) gerando substantivos abstratos a partir de verbos de ação.",
+        summaryHtml: `
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-brand-500">Derivação Parassintética:</b> Adição SIMULTÂNEA de prefixo e sufixo. Se tirar um deles, a palavra NÃO existe (ex: <i>en-tard-ecer, a-noit-ecer</i>).
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-brand-500">Prefixal e Sufixal:</b> Adição independente. Se remover um, a outra forma existe (ex: <i>des-leal-dade</i> -> desleal existe, lealdade existe).
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-amber-500">Derivação Regressiva (Deverbal):</b> Verbo de ação vira substantivo abstrato com redução (ex: <i>combater -> o combate, debater -> o debate, pescar -> a pesca</i>).
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-amber-500">Derivação Imprópria:</b> Mudança de classe gramatical sem alterar a grafia (ex: <i>O 'não' machucou</i> -> advérbio virou substantivo).
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 3,
+        title: "Morfologia I (Subst., Artigo, Adj., Numeral)",
+        desc: "Classes nominais, flexões de gênero/número, plural dos substantivos e adjetivos compostos.",
+        badge: "Classes Nominais",
+        bancaHighlight: "Adjetivos compostos: em regra só o último varia (ex: olhos castanho-claros). Se houver substantivo, nenhum varia (ex: camisas verde-oliva).",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <p>Os substantivos dão nome aos seres; adjetivos caracterizam; artigos determinam ou generalizam; numerais quantificam ou ordenam.</p>
+            <div class="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800">
+              <b class="text-blue-700 dark:text-blue-300">Regra de ouro do plural dos compostos com substantivo:</b>
+              <p class="mt-1">Quando a cor é expressa por um substantivo ou expressão com substantivo, NADA varia: <i>sapatos azul-marinho, ternos azul-celeste, blusas cor-de-rosa, paredes cinza-chumbo</i>.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 4,
+        title: "Morfologia II (Pronomes & Colocação Pronominal)",
+        desc: "Pronomes retos e oblíquos, demonstrativos (este/esse/aquele), relativos e próclise/ênclise/mesóclise.",
+        badge: "Alta Incidência",
+        bancaHighlight: "Casos de próclise obrigatória: palavras negativas, pronomes relativos, conjunções subordinativas e advérbios sem pausa.",
+        summaryHtml: `
+          <div class="space-y-4 text-xs">
+            <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-xl">
+              <h5 class="font-bold text-sm text-brand-600 mb-2">Palavras Atrativas (Próclise Obrigatória):</h5>
+              <ul class="list-disc pl-5 space-y-1">
+                <li><b>Palavras Negativas:</b> Não, nunca, jamais, nada (<i>Não <u>se</u> vá</i>).</li>
+                <li><b>Pronomes Relativos:</b> Que, quem, cujo, onde (<i>O livro que <u>me</u> destes</i>).</li>
+                <li><b>Conjunções Subordinativas:</b> Porque, embora, quando (<i>Quando <u>o</u> encontrei</i>).</li>
+                <li><b>Advérbios sem vírgula:</b> Sempre, talvez, aqui (<i>Sempre <u>me</u> disseram isso</i>).</li>
+              </ul>
+            </div>
+            <div class="p-3 bg-rose-50 dark:bg-rose-950/30 rounded-xl text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+              <b>PROIBIÇÃO CLÁSSICA:</b> Nunca inicie oração com pronome oblíquo átono na norma culta padrão (<i>Me dá um café [ERRADO] -> Dê-me um café [CORRETO]</i>).
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 5,
+        title: "Morfologia III (Verbos: Tempos, Modos e Vozes)",
+        desc: "Presente, pretéritos, futuros, subjuntivo, correlação verbal, vozes ativa, passiva e reflexiva.",
+        badge: "Coração da Gramática",
+        bancaHighlight: "Correlação verbal imperfeito do subjuntivo + futuro do pretérito do indicativo: 'Se eu PUDESSE, FARIA'.",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+              <b class="text-brand-500">Pretérito Perfeito vs Imperfeito:</b>
+              <p>Perfeito = ação concluída pontual (<i>ontem estudei</i>). Imperfeito = hábito no passado ou processo contínuo (<i>na infância estudava todo dia</i>).</p>
+            </div>
+            <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-xl text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+              <b>Transposição de Voz Ativa para Voz Passiva Analítica:</b>
+              <p class="mt-1">Objeto direto vira sujeito paciente. O verbo principal vai para o particípio auxiliado pelo verbo SER no mesmo tempo original.</p>
+              <p class="italic mt-0.5">"O presidente assinou (pret. perf.) o termo" ➔ "O termo foi assinado (pret. perf.) pelo presidente".</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 6,
+        title: "Morfologia IV (Advérbio, Preposição & Conjunção)",
+        desc: "Valores semânticos dos conectivos, conjunções coordenativas (5 tipos) e subordinativas (9 adverbiais).",
+        badge: "Decisivo em Textos",
+        bancaHighlight: "A conjunção 'CONQUANTO' é concessiva (= embora). A conjunção 'PORQUANTO' é causal ou explicativa (= porque).",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-brand-600">5 Coordenativas:</b>
+                <ul class="list-disc pl-4 mt-1 space-y-0.5">
+                  <li>Aditivas (e, nem, bem como)</li>
+                  <li>Adversativas (mas, porém, todavia, contudo)</li>
+                  <li>Alternativas (ou...ou, ora...ora)</li>
+                  <li>Conclusivas (logo, portanto, por isso)</li>
+                  <li>Explicativas (pois antes do verbo, que)</li>
+                </ul>
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-brand-600">Concessivas Mais Cobradas:</b>
+                <p class="mt-1">Embora, conquanto, ainda que, mesmo que, a despeito de, posto que. Elas trazem uma quebra de expectativa mas não impedem a ação principal.</p>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 7,
+        title: "Sintaxe do Período Simples",
+        desc: "Termos essenciais (sujeito, predicado), integrantes (OD, OI, CN, agente da passiva) e acessórios (adjuntos, aposto, vocativo).",
+        badge: "Análise Sintática",
+        bancaHighlight: "Diferença vital: Adjunto Adnominal (posse, agente, com preposição ligada a substantivo concreto/abstrato) vs Complemento Nominal (paciente, obrigatório com adjetivo/advérbio).",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-xl space-y-2">
+              <h5 class="font-bold text-brand-600">Duelo das Provas: Adjunto Adnominal vs Complemento Nominal</h5>
+              <p>1. Ligado a <b>Adjetivo</b> ou <b>Advérbio</b> sempre será <b>Complemento Nominal</b>.</p>
+              <p>2. Ligado a <b>Substantivo Concreto</b> sempre será <b>Adjunto Adnominal</b>.</p>
+              <p>3. Ligado a <b>Substantivo Abstrato + com a preposição DE</b>: Se tem sentido AGENTE (faz a ação) = <i>Adjunto</i>. Se tem sentido PACIENTE (sofre a ação) = <i>Complemento</i>.</p>
+              <p class="italic text-slate-500">Ex: "A resposta do aluno" (aluno respondeu = agente = Adjunto). "A resposta ao aluno" (aluno recebeu = paciente = Complemento).</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 8,
+        title: "Sintaxe do Período Composto",
+        desc: "Orações coordenadas, subordinadas substantivas (com 'que' conjunção integrante), adjetivas e adverbiais.",
+        badge: "O Mais Amado por Bancas",
+        bancaHighlight: "Identificação do 'QUE': Troque a oração toda por 'ISSO'. Se couber, trata-se de Conjunção Integrante (Subordinada Substantiva).",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-brand-50 dark:bg-brand-950/40 rounded-xl border border-brand-200 dark:border-brand-800">
+              <b class="text-brand-700 dark:text-brand-300">MACETE DO 'ISSO':</b>
+              <p class="mt-1">"Quero <u>que você vença</u>" ➔ "Quero <b>ISSO</b>". Coube com perfeição? O "que" é conjunção integrante e a oração é Subordinada Substantiva Objetiva Direta.</p>
+            </div>
+            <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+              <b class="text-amber-500">Adjetiva Explicativa vs Restritiva:</b>
+              <p class="mt-1">Com vírgulas = <b>Explicativa</b> (generaliza todos: <i>Os homens, que são mortais, vivem pouco</i>). Sem vírgulas = <b>Restritiva</b> (delimita parte do grupo: <i>Os alunos que estudaram passaram</i>).</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 9,
+        title: "Concordância Verbal e Nominal",
+        desc: "Regras especiais do sujeito composto, verbo haver/fazer no sentido de tempo, partícula 'se' (apassivador vs índice de indeterminação).",
+        badge: "Erro Frequente em Redação",
+        bancaHighlight: "O verbo 'HAVER' (existir/ocorrer/tempo decorrido) é impessoal: fica no singular! 'Havia muitas vagas' (nunca 'Haviam').",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-rose-50 dark:bg-rose-950/30 rounded-xl text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+              <b>Cuidado com a Partícula SE:</b>
+              <ul class="list-disc pl-4 mt-1">
+                <li><b>VTD + SE (Pronome apassivador):</b> Concorda com o sujeito! <i>"Alugam-se casas", "Vende-se casa"</i>.</li>
+                <li><b>VTI / VI + SE (Índice de indeterminação do sujeito):</b> Verbo OBRIGATORIAMENTE no singular! <i>"Precisa-se de funcionários", "Vive-se bem aqui"</i>.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 10,
+        title: "Regência Verbal, Nominal & Crase",
+        desc: "Verbos aspirar, visar, assistir, obedecer, preferir, esquecer/lembrar e as regras proibitivas e facultativas de crase.",
+        badge: "Chave de Aprovação",
+        bancaHighlight: "Crase é a fusão de Preposição 'A' + Artigo 'A' (ou pronome demonstrativo). Troque a palavra feminina por uma masculina; se virar 'AO', há crase!",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+              <b class="text-brand-600">Regências Críticas:</b>
+              <p class="mt-1"><b>Assistir:</b> no sentido de ver exige 'A' (<i>Assisti ao filme</i>). No sentido de ajudar não exige (<i>O médico assistiu o paciente</i>).</p>
+              <p class="mt-1"><b>Aspirar:</b> respirar = sem prep. (<i>Aspirei o ar puro</i>); desejar/almejar = com 'A' (<i>Aspiro ao cargo público</i>).</p>
+              <p class="mt-1"><b>Preferir:</b> exige 'A' e não 'do que' (<i>Prefiro ler a ver TV</i>).</p>
+            </div>
+            <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+              <b>Casos onde a Crase é PROIBIDA:</b> Antes de palavra masculina, antes de verbo, antes de pronomes de tratamento (exceto senhora/senhorita), entre palavras repetidas (cara a cara).
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 11,
+        title: "Pontuação & Uso da Vírgula",
+        desc: "Proibições da vírgula (sujeito e verbo), orações intercaladas, adjuntos adverbiais deslocados e vocativos.",
+        badge: "Semântica & Sintaxe",
+        bancaHighlight: "REGRA DE FERRO: Jamais separe por vírgula o Sujeito do seu Verbo, nem o Verbo do seu Complemento direto.",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-xl space-y-1.5">
+              <h5 class="font-bold text-rose-500">O que NUNCA fazer com a vírgula:</h5>
+              <p>❌ Não separar sujeito e predicado: <i>"O candidato dedicado, passou na prova"</i> (ERRADO).</p>
+              <p>❌ Não separar verbo e seu objeto: <i>"Entreguei, os relatórios ao chefe"</i> (ERRADO).</p>
+              <h5 class="font-bold text-emerald-500 mt-2">Onde a vírgula é OBRIGATÓRIA:</h5>
+              <p>✔️ Vocativo: <i>"Vamos almoçar, amigos!"</i></p>
+              <p>✔️ Aposto explicativo: <i>"Brasília, capital do Brasil, foi planejada."</i></p>
+              <p>✔️ Adjunto adverbial de grande extensão deslocado no início ou meio da oração.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 12,
+        title: "Semântica, Figuras & Interpretação Textual",
+        desc: "Sinonímia, polissemia, metáfora, metonímia, paradoxo, ironia, tipos e gêneros textuais, pressupostos e subentendidos.",
+        badge: "Interpretação",
+        bancaHighlight: "Diferencie 'Pressuposto' (ideia que decorre necessariamente de marcas linguísticas expressas) de 'Subentendido' (insinuação deduzida pelo contexto do leitor).",
+        summaryHtml: `
+          <div class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-brand-500">Metáfora vs Metonímia:</b>
+                <p>Metáfora: comparação implícita subjetiva (<i>"Você tem um coração de pedra"</i>). Metonímia: relação de contiguidade real, autor pela obra, continente pelo conteúdo (<i>"Li Machado de Assis", "Bebeu dois copos"</i>).</p>
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                <b class="text-brand-500">Tipologia Textual:</b>
+                <p><b>Narrativo:</b> tempo cronológico, personagens e ação. <b>Dissertativo-argumentativo:</b> tese defendida por argumentos racionais. <b>Injuntivo:</b> verbos no imperativo dando instruções (manuais, receitas).</p>
+              </div>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    /* =====================================================================
+       2. BANCO DE QUESTÕES GABARITADAS E COMENTADAS
+       ===================================================================== */
+    const QUESTIONS = [
+      {
+        id: 101,
+        moduleId: 1,
+        banca: "Cebraspe",
+        ano: 2024,
+        enunciado: "Julgue o item a respeito da acentuação gráfica das palavras destacadas:\nAs palavras 'saúde' e 'país' são acentuadas graficamente pela mesma regra que justifica o acento na palavra 'história'.",
+        options: [
+          { letter: "C", text: "Certo" },
+          { letter: "E", text: "Errado" }
+        ],
+        gabarito: "E",
+        explicacao: "ERRADO. As palavras 'saúde' (sa-ú-de) e 'país' (pa-ís) são acentuadas pela regra dos hiatos tônicos (I e U tônicos, sozinhos na sílaba, sem NH depois). Já a palavra 'história' (his-tó-ria) é acentuada por ser uma paroxítona terminada em ditongo crescente oral (ou proparoxítona eventual). Trata-se de regras distintas."
+      },
+      {
+        id: 102,
+        moduleId: 1,
+        banca: "FGV",
+        ano: 2023,
+        enunciado: "De acordo com o atual Acordo Ortográfico da Língua Portuguesa, assinale a opção em que todas as palavras estão corretamente grafadas quanto à acentuação:",
+        options: [
+          { letter: "A", text: "Idéia, jibóia, heróico, feiúra." },
+          { letter: "B", text: "Ideia, jiboia, herói, assembleia." },
+          { letter: "C", text: "Herói, chapéu, apóia, crêem." },
+          { letter: "D", text: "Pôde, pára (verbo), vou, enjôo." },
+          { letter: "E", text: "Pólen, polens, ítens, hífen." }
+        ],
+        gabarito: "B",
+        explicacao: "Gabarito: B. Pelo Acordo Ortográfico, os ditongos abertos EI e OI das paroxítonas perderam o acento (ideia, jiboia, assembleia). Contudo, nas oxítonas eles se mantêm acentuados (herói, troféu). Em A, 'idéia' tem acento indevido; em C, 'apóia' e 'crêem' perderam acento; em D, 'pára' (verbo) e 'enjôo' perderam acento; em E, 'polens' e 'itens' não levam acento."
+      },
+      {
+        id: 103,
+        moduleId: 2,
+        banca: "FGV",
+        ano: 2023,
+        enunciado: "O vocábulo 'o combate' formou-se pelo mesmo processo de derivação presente em:",
+        options: [
+          { letter: "A", text: "Deslealdade." },
+          { letter: "B", text: "Amanhecer." },
+          { letter: "C", text: "O resgate." },
+          { letter: "D", text: "Infelizmente." },
+          { letter: "E", text: "Guarda-roupa." }
+        ],
+        gabarito: "C",
+        explicacao: "Gabarito: C. 'O combate' é substantivo abstrato formado a partir do verbo de ação 'combater' por meio de Derivação Regressiva (ou deverbal), perdendo a terminação verbal e acrescentando vogal temática. O mesmo ocorre em 'resgatar' -> 'o resgate'. (A é prefixal e sufixal, B é parassíntese, D é sufixal, E é composição por justaposição)."
+      },
+      {
+        id: 104,
+        moduleId: 4,
+        banca: "Cebraspe",
+        ano: 2024,
+        enunciado: "Julgue a correção gramatical da frase a seguir:\n'Jamais esquecerei-me das lições de dignidade que meus pais transmitiram aos seus filhos.'",
+        options: [
+          { letter: "C", text: "Certo" },
+          { letter: "E", text: "Errado" }
+        ],
+        gabarito: "E",
+        explicacao: "ERRADO. A palavra 'Jamais' possui valor semântico negativo e atua como palavra atrativa de próclise obrigatória. Além disso, 'esquecerei' está no futuro do presente (tempo que não aceita ênclise de forma alguma!). O correto de acordo com a norma culta seria a próclise: 'Jamais ME esquecerei das lições...'."
+      },
+      {
+        id: 105,
+        moduleId: 5,
+        banca: "FCC",
+        ano: 2023,
+        enunciado: "Transpondo a frase: 'O comitê de ética analisou com rigor todas as denúncias apresentadas' para a voz passiva analítica, obtém-se a forma verbal correspondente:",
+        options: [
+          { letter: "A", text: "Foram analisadas." },
+          { letter: "B", text: "Tinham sido analisadas." },
+          { letter: "C", text: "Eram analisadas." },
+          { letter: "D", text: "Seriam analisadas." },
+          { letter: "E", text: "Haviam de analisar." }
+        ],
+        gabarito: "A",
+        explicacao: "Gabarito: A. Na ativa: 'analisou' está no pretérito perfeito do indicativo. Na passiva analítica, o verbo SER deve vir no mesmo tempo (pretérito perfeito: 'foram') concordando no plural com o novo sujeito paciente ('todas as denúncias'). Resultado: 'Todas as denúncias foram analisadas com rigor pelo comitê de ética'."
+      },
+      {
+        id: 106,
+        moduleId: 6,
+        banca: "Vunesp",
+        ano: 2024,
+        enunciado: "Na oração: 'Embora houvesse divergências pontuais, o acordo foi homologado pelo tribunal', o conectivo destacado introduz uma oração que expressa ideia de:",
+        options: [
+          { letter: "A", text: "Causa." },
+          { letter: "B", text: "Condição." },
+          { letter: "C", text: "Concessão." },
+          { letter: "D", text: "Consequência." },
+          { letter: "E", text: "Conformidade." }
+        ],
+        gabarito: "C",
+        explicacao: "Gabarito: C. A conjunção 'embora' é a conjunção subordinativa concessiva por excelência. A concessão traduz um obstáculo, ressalva ou fato inesperado que não anula nem impede a concretização do fato enunciado na oração principal."
+      },
+      {
+        id: 107,
+        moduleId: 7,
+        banca: "FGV",
+        ano: 2024,
+        enunciado: "Em 'A destruição da floresta causou comoção mundial', o termo 'da floresta' exerce a função sintática de:",
+        options: [
+          { letter: "A", text: "Adjunto Adnominal." },
+          { letter: "B", text: "Complemento Nominal." },
+          { letter: "C", text: "Objeto Indireto." },
+          { letter: "D", text: "Agente da Passiva." },
+          { letter: "E", text: "Aposto Especificativo." }
+        ],
+        gabarito: "B",
+        explicacao: "Gabarito: B. 'Destruição' é um substantivo abstrato derivado de verbo de ação ('destruir'). O termo 'da floresta' possui sentido nitidamente PASSIVO/PACIENTE (a floresta foi destruída, sofreu a destruição). Quando o termo preposicionado ligado a substantivo abstrato possui valor paciente, classifica-se como Complemento Nominal."
+      },
+      {
+        id: 108,
+        moduleId: 8,
+        banca: "Cebraspe",
+        ano: 2023,
+        enunciado: "No trecho: 'Todos os auditores sabiam que o relatório técnico apontaria inconsistências nas contas', a palavra 'que' introduz uma oração subordinada substantiva objetiva direta.",
+        options: [
+          { letter: "C", text: "Certo" },
+          { letter: "E", text: "Errado" }
+        ],
+        gabarito: "C",
+        explicacao: "CERTO. Aplica-se o macete de substituição: 'Todos os auditores sabiam [ISSO]'. O verbo 'saber' é transitivo direto (quem sabe, sabe algo). Como a oração inteira funciona como objeto direto do verbo 'sabiam', ela é uma Oração Subordinada Substantiva Objetiva Direta, e o 'que' funciona como conjunção integrante."
+      },
+      {
+        id: 109,
+        moduleId: 9,
+        banca: "FCC",
+        ano: 2023,
+        enunciado: "Assinale a frase redigida inteiramente de acordo com a norma culta de concordância verbal:",
+        options: [
+          { letter: "A", text: "Haviam muitos anos que não se realizavam auditorias naquele setor." },
+          { letter: "B", text: "Tratam-se de questões prioritárias para a gestão pública moderna." },
+          { letter: "C", text: "Fazem dez meses que foram implementadas as novas regras de conduta." },
+          { letter: "D", text: "Devem haver soluções práticas para conter o desperdício orçamentário." },
+          { letter: "E", text: "Alugam-se salas comerciais no centro histórico da cidade." }
+        ],
+        gabarito: "E",
+        explicacao: "Gabarito: E. Em 'Alugam-se salas comerciais', o verbo 'alugar' é Transitivo Direto acompanhado da partícula 'se' (pronome apassivador). 'Salas comerciais' é o sujeito paciente no plural, logo o verbo deve concordar: 'Alugam-se salas' (= salas são alugadas). Em A, haver de tempo decorrido fica no singular ('Havia muitos anos'). Em B, 'trata-se' é VTI + índice, fica no singular. Em C, fazer de tempo decorrido é singular ('Faz dez meses'). Em D, haver no sentido de existir transmite impessoalidade ao auxiliar ('Deve haver')."
+      },
+      {
+        id: 110,
+        moduleId: 10,
+        banca: "Vunesp",
+        ano: 2024,
+        enunciado: "Assinale a alternativa em que o sinal indicativo de crase foi empregado de maneira correta:",
+        options: [
+          { letter: "A", text: "O candidato declarou-se disposto à colaborar com as investigações." },
+          { letter: "B", text: "O cidadão recorreu à uma autoridade judiciária competente." },
+          { letter: "C", text: "A fiscalização compareceu à repartição pública pontualmente." },
+          { letter: "D", text: "Eles caminhavam passo à passo pelas ruas históricas." },
+          { letter: "E", text: "O comunicado foi dirigido à todos os servidores da repartição." }
+        ],
+        gabarito: "C",
+        explicacao: "Gabarito: C. Quem comparece, comparece A algum lugar (preposição 'A') + o substantivo feminino determinado 'a repartição' (artigo 'A') ➔ fusão: À repartição. (Em A é antes de verbo = proibido; em B é antes de artigo indefinido = proibido; em D é entre palavras repetidas = proibido; em E é antes de pronome indefinido masculino 'todos' = proibido)."
+      },
+      {
+        id: 111,
+        moduleId: 11,
+        banca: "Cebraspe",
+        ano: 2024,
+        enunciado: "Julgue o item quanto à pontuação da frase:\n'O procurador geral da república, durante a sessão solene, solicitou a palavra para esclarecer as medidas cabíveis.'",
+        options: [
+          { letter: "C", text: "Certo" },
+          { letter: "E", text: "Errado" }
+        ],
+        gabarito: "C",
+        explicacao: "CERTO. As duas vírgulas isolam com correção o adjunto adverbial de tempo intercalado ('durante a sessão solene'). O sujeito ('O procurador geral da república') não foi separado indevidamente do verbo ('solicitou') por apenas uma vírgula; o termo intermediário está devidamente encapsulado entre vírgulas."
+      },
+      {
+        id: 112,
+        moduleId: 12,
+        banca: "ENEM",
+        ano: 2023,
+        enunciado: "No trecho 'Os olhos daquela criança falavam mais do que mil enciclopédias', identifica-se predominantemente a figura de linguagem denominada:",
+        options: [
+          { letter: "A", text: "Metonímia." },
+          { letter: "B", text: "Eufemismo." },
+          { letter: "C", text: "Personificação (ou Prosopopeia)." },
+          { letter: "D", text: "Pleonasmo." },
+          { letter: "E", text: "Antítese." }
+        ],
+        gabarito: "C",
+        explicacao: "Gabarito: C. A personificação (ou prosopopeia) consiste na atribuição de ações, qualidades ou sentimentos humanos a seres inanimados ou partes anatômicas ('olhos falavam'). Além disso, há o recurso da hipérbole pelo exagero, mas entre as opções dadas a atribuição da fala aos olhos consagra a prosopopeia."
+      }
+    ];
+
+    /* =====================================================================
+       3. ESTADO DA APLICAÇÃO (LOCALSTORAGE)
+       ===================================================================== */
+    const STORAGE_KEY = "gabarita_pt_state_v2";
+
+    let state = {
+      userAnswers: {},     // { questionId: { selected: "A", isCorrect: true, date: "2026-11-04" } }
+      completedModules: {},// { moduleId: true }
+      streakDays: 1,
+      lastActiveDate: new Date().toISOString().split("T")[0],
+      darkMode: false
+    };
+
+    function loadState() {
+      try {
+        const local = localStorage.getItem(STORAGE_KEY);
+        if (local) {
+          const parsed = JSON.parse(local);
+          state = { ...state, ...parsed };
+        }
+      } catch (e) {
+        console.error("Falha ao carregar estado do localStorage", e);
+      }
+      checkStreak();
+      applyTheme();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.error("Falha ao salvar estado", e);
+      }
+    }
+
+    function checkStreak() {
+      const today = new Date().toISOString().split("T")[0];
+      if (state.lastActiveDate !== today) {
+        const last = new Date(state.lastActiveDate);
+        const now = new Date(today);
+        const diffDays = Math.round((now - last) / (1000 * 3600 * 24));
+        if (diffDays === 1) {
+          state.streakDays += 1;
+        } else if (diffDays > 1) {
+          state.streakDays = 1;
+        }
+        state.lastActiveDate = today;
+        saveState();
+      }
+      document.getElementById("streak-counter").innerText = `${state.streakDays} ${state.streakDays === 1 ? 'dia' : 'dias'}`;
+    }
+
+    /* =====================================================================
+       4. SISTEMA DE NAVEGAÇÃO ENTRE TELAS
+       ===================================================================== */
+    let currentTab = "dashboard";
+
+    function navigate(tabId) {
+      currentTab = tabId;
+      const views = ["dashboard", "trilha", "questoes", "caderno-erros"];
+      
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        const btn = document.getElementById(`nav-btn-${v}`);
+        const mBtn = document.getElementById(`m-nav-btn-${v}`);
+
+        if (v === tabId) {
+          el.classList.remove("hidden");
+          if (btn) {
+            btn.className = "nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 transition-all bg-white dark:bg-slate-700 text-brand-700 dark:text-white font-bold shadow-sm";
+          }
+          if (mBtn) {
+            mBtn.className = "m-nav-tab py-2 px-2 flex flex-col items-center gap-1 text-brand-600 dark:text-brand-400 font-bold";
+          }
+        } else {
+          el.classList.add("hidden");
+          if (btn) {
+            btn.className = "nav-tab px-3.5 py-1.5 rounded-lg flex items-center gap-2 transition-all text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white";
+          }
+          if (mBtn) {
+            mBtn.className = "m-nav-tab py-2 px-2 flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400";
+          }
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Atualizações sob demanda
+      if (tabId === "dashboard") updateDashboardMetrics();
+      if (tabId === "questoes") renderQuestionsList();
+      if (tabId === "caderno-erros") renderCadernoErros();
+
+      lucide.createIcons();
+    }
+
+    /* =====================================================================
+       5. RENDERIZAÇÃO DA TRILHA DE MÓDULOS
+       ===================================================================== */
+    function renderModules(filterText = "") {
+      const container = document.getElementById("modules-container");
+      container.innerHTML = "";
+
+      const query = filterText.toLowerCase().trim();
+
+      MODULES.forEach(mod => {
+        if (query && !mod.title.toLowerCase().includes(query) && !mod.desc.toLowerCase().includes(query)) {
+          return;
+        }
+
+        const isCompleted = !!state.completedModules[mod.id];
+        const card = document.createElement("div");
+        card.className = `p-5 rounded-2xl border transition-all flex flex-col justify-between card-highlight ${
+          isCompleted 
+            ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800' 
+            : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+        }`;
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                isCompleted 
+                  ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300' 
+                  : 'bg-brand-50 text-brand-600 dark:bg-brand-900/40 dark:text-brand-300'
+              }">${mod.badge}</span>
+              <button onclick="toggleModuleDone(${mod.id}, event)" title="${isCompleted ? 'Marcar como não estudado' : 'Marcar como estudado'}" class="p-1 rounded-lg text-slate-400 hover:text-emerald-600 transition">
+                <i data-lucide="${isCompleted ? 'check-circle-2' : 'circle'}" class="w-5 h-5 ${isCompleted ? 'text-emerald-600 fill-emerald-100 dark:fill-emerald-900' : ''}"></i>
+              </button>
+            </div>
+            <div class="text-xs font-extrabold uppercase text-slate-400">Módulo ${mod.id}</div>
+            <h3 class="font-extrabold text-base sm:text-lg mt-0.5 text-slate-900 dark:text-white">${mod.title}</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-2">${mod.desc}</p>
+            
+            <div class="mt-4 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-[11px] text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700/60 flex items-start gap-2">
+              <i data-lucide="crosshair" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+              <span><b>Banca em Foco:</b> ${mod.bancaHighlight}</span>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+            <button onclick="openManualModal(${mod.id})" class="text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1">
+              <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Abrir Manual Teórico
+            </button>
+            <button onclick="filtrarQuestoesPorModulo(${mod.id})" class="px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-brand-600 hover:text-white text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition flex items-center gap-1">
+              <span>Questões</span>
+              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function filterModules() {
+      const q = document.getElementById("trilha-search-input").value;
+      renderModules(q);
+    }
+
+    function toggleModuleDone(moduleId, event) {
+      if (event) event.stopPropagation();
+      state.completedModules[moduleId] = !state.completedModules[moduleId];
+      saveState();
+      renderModules(document.getElementById("trilha-search-input").value);
+      updateDashboardMetrics();
+      showToast(state.completedModules[moduleId] ? "Módulo marcado como concluído! 🎉" : "Módulo desmarcado.");
+    }
+
+    /* =====================================================================
+       6. MODAL DO MANUAL TEÓRICO ESQUEMATIZADO
+       ===================================================================== */
+    let currentActiveModuleId = 1;
+
+    function openManualModal(moduleId) {
+      currentActiveModuleId = moduleId;
+      const mod = MODULES.find(m => m.id === moduleId);
+      if (!mod) return;
+
+      document.getElementById("modal-mod-badge").innerText = `Módulo ${mod.id} • ${mod.badge}`;
+      document.getElementById("modal-mod-title").innerText = mod.title;
+      document.getElementById("modal-mod-content").innerHTML = mod.summaryHtml;
+      
+      const check = document.getElementById("modal-check-completed");
+      check.checked = !!state.completedModules[mod.id];
+
+      openModal("manual-modal");
+      lucide.createIcons();
+    }
+
+    function toggleModuleCompletionFromModal() {
+      const checked = document.getElementById("modal-check-completed").checked;
+      state.completedModules[currentActiveModuleId] = checked;
+      saveState();
+      renderModules();
+      updateDashboardMetrics();
+      showToast(checked ? "Módulo concluído!" : "Status atualizado.");
+    }
+
+    function irParaQuestoesDoModulo() {
+      closeModal("manual-modal");
+      filtrarQuestoesPorModulo(currentActiveModuleId);
+    }
+
+    function filtrarQuestoesPorModulo(modId) {
+      navigate("questoes");
+      const sel = document.getElementById("filter-module");
+      sel.value = modId;
+      applyQuestionFilters();
+    }
+
+    /* =====================================================================
+       7. BANCO DE QUESTÕES, FILTROS & GABARITO COMENTADO
+       ===================================================================== */
+    let filteredQuestions = [...QUESTIONS];
+
+    function populateFilterModulesSelect() {
+      const sel = document.getElementById("filter-module");
+      sel.innerHTML = '<option value="all">Todos os 12 Módulos</option>';
+      MODULES.forEach(m => {
+        const opt = document.createElement("option");
+        opt.value = m.id;
+        opt.innerText = `Módulo ${m.id}: ${m.title}`;
+        sel.appendChild(opt);
+      });
+    }
+
+    function applyQuestionFilters() {
+      const modVal = document.getElementById("filter-module").value;
+      const bancaVal = document.getElementById("filter-banca").value;
+      const statusVal = document.getElementById("filter-status").value;
+
+      filteredQuestions = QUESTIONS.filter(q => {
+        // Filtro módulo
+        if (modVal !== "all" && q.moduleId !== parseInt(modVal)) return false;
+        // Filtro banca
+        if (bancaVal !== "all" && q.banca !== bancaVal) return false;
+        // Filtro status
+        const ans = state.userAnswers[q.id];
+        if (statusVal === "unanswered" && ans) return false;
+        if (statusVal === "correct" && (!ans || !ans.isCorrect)) return false;
+        if (statusVal === "wrong" && (!ans || ans.isCorrect)) return false;
+
+        return true;
+      });
+
+      renderQuestionsList();
+    }
+
+    function resetFilters() {
+      document.getElementById("filter-module").value = "all";
+      document.getElementById("filter-banca").value = "all";
+      document.getElementById("filter-status").value = "all";
+      applyQuestionFilters();
+    }
+
+    function renderQuestionsList() {
+      const listEl = document.getElementById("questions-list");
+      listEl.innerHTML = "";
+      document.getElementById("filtered-count").innerText = filteredQuestions.length;
+
+      if (filteredQuestions.length === 0) {
+        listEl.innerHTML = `
+          <div class="text-center py-12 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8">
+            <i data-lucide="folder-search" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
+            <h4 class="font-bold text-base">Nenhuma questão encontrada com os filtros atuais</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Tente remover alguns filtros ou selecionar 'Todos os Módulos'.</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-brand-600 text-white text-xs font-semibold rounded-xl">Limpar Filtros</button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      filteredQuestions.forEach((q, index) => {
+        const mod = MODULES.find(m => m.id === q.moduleId);
+        const userAnswer = state.userAnswers[q.id];
+        const isAnswered = !!userAnswer;
+        const isCorrect = isAnswered && userAnswer.isCorrect;
+
+        const card = document.createElement("div");
+        card.id = `question-card-${q.id}`;
+        card.className = "bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm space-y-4";
+
+        card.innerHTML = `
+          <!-- Meta cabeçalho -->
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-2">
+              <span class="font-bold px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 border border-brand-200/50">${q.banca} (${q.ano})</span>
+              <span class="font-semibold text-slate-600 dark:text-slate-300">Módulo ${q.moduleId}: ${mod ? mod.title : ''}</span>
+            </div>
+            
+            <div id="badge-status-${q.id}">
+              ${
+                !isAnswered 
+                  ? '<span class="text-slate-400 font-medium flex items-center gap-1"><i data-lucide="circle" class="w-3.5 h-3.5"></i> Pendente</span>'
+                  : isCorrect
+                    ? '<span class="text-emerald-600 font-bold flex items-center gap-1"><i data-lucide="check-circle" class="w-4 h-4"></i> Você Acertou!</span>'
+                    : '<span class="text-rose-600 font-bold flex items-center gap-1"><i data-lucide="x-circle" class="w-4 h-4"></i> Você Errou</span>'
+              }
+            </div>
+          </div>
+
+          <!-- Enunciado -->
+          <div class="text-sm sm:text-base font-medium text-slate-900 dark:text-slate-100 whitespace-pre-line leading-relaxed">
+            ${q.enunciado}
+          </div>
+
+          <!-- Alternativas -->
+          <div class="space-y-2 pt-2">
+            ${q.options.map(opt => {
+              let optClass = "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60";
+              if (isAnswered) {
+                if (opt.letter === q.gabarito) {
+                  optClass = "border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 font-semibold";
+                } else if (userAnswer.selected === opt.letter && !isCorrect) {
+                  optClass = "border-rose-500 bg-rose-50/70 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200";
+                }
+              }
+
+              return `
+                <div onclick="selectAnswer(${q.id}, '${opt.letter}')" class="p-3 sm:p-3.5 rounded-xl border text-xs sm:text-sm flex items-start gap-3 cursor-pointer transition ${optClass}">
+                  <span class="w-6 h-6 rounded-lg bg-slate-100 dark:bg-slate-800 font-bold flex items-center justify-center shrink-0 text-slate-700 dark:text-slate-300">
+                    ${opt.letter}
+                  </span>
+                  <div class="pt-0.5 leading-snug">${opt.text}</div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+
+          <!-- Gabarito Comentado Expandido -->
+          <div id="comment-box-${q.id}" class="${isAnswered ? '' : 'hidden'} p-4 bg-slate-50 dark:bg-slate-800/70 rounded-2xl border border-slate-200/80 dark:border-slate-700 space-y-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-2 font-bold ${isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">
+              <i data-lucide="message-square" class="w-4 h-4"></i> Gabarito Oficial: Letra ${q.gabarito}
+            </div>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">${q.explicacao}</p>
+          </div>
+        `;
+
+        listEl.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function selectAnswer(questionId, letter) {
+      const q = QUESTIONS.find(item => item.id === questionId);
+      if (!q) return;
+
+      const isCorrect = (letter === q.gabarito);
+      state.userAnswers[questionId] = {
+        selected: letter,
+        isCorrect: isCorrect,
+        date: new Date().toISOString()
+      };
+
+      saveState();
+      updateDashboardMetrics();
+
+      // Atualiza o card específico
+      const card = document.getElementById(`question-card-${questionId}`);
+      if (card) {
+        renderQuestionsList();
+      }
+
+      if (isCorrect) {
+        showToast("Parabéns! Resposta Correta! 🎯");
+      } else {
+        showToast("Você errou! Questão enviada ao Caderno de Erros. ⚠️");
+      }
+    }
+
+    /* =====================================================================
+       8. SIMULADO CRONOMETRADO
+       ===================================================================== */
+    let simuladoTimerInterval = null;
+    let simuladoSeconds = 0;
+
+    function startTimedSimulado() {
+      // Inicia timer
+      if (simuladoTimerInterval) clearInterval(simuladoTimerInterval);
+      simuladoSeconds = 0;
+      document.getElementById("simulado-timer-box").classList.remove("hidden");
+      document.getElementById("simulado-timer-box").classList.add("flex");
+      
+      simuladoTimerInterval = setInterval(() => {
+        simuladoSeconds++;
+        const h = String(Math.floor(simuladoSeconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((simuladoSeconds % 3600) / 60)).padStart(2, '0');
+        const s = String(simuladoSeconds % 60).padStart(2, '0');
+        document.getElementById("timer-display").innerText = `${h}:${m}:${s}`;
+      }, 1000);
+
+      // Limpa filtros para deixar todas
+      resetFilters();
+      showToast("Simulado Cronometrado Iniciado! Boa prova!");
+    }
+
+    function stopSimuladoTimer() {
+      if (simuladoTimerInterval) {
+        clearInterval(simuladoTimerInterval);
+        simuladoTimerInterval = null;
+      }
+      document.getElementById("simulado-timer-box").classList.add("hidden");
+      document.getElementById("simulado-timer-box").classList.remove("flex");
+      showToast(`Simulado encerrado! Tempo total: ${document.getElementById("timer-display").innerText}`);
+    }
+
+    function startQuickQuiz() {
+      navigate("questoes");
+      document.getElementById("filter-status").value = "unanswered";
+      applyQuestionFilters();
+      window.scrollTo({ top: 350, behavior: 'smooth' });
+      showToast("Modo Treino Rápido: Resolva as questões pendentes!");
+    }
+
+    /* =====================================================================
+       9. CADERNO DE ERROS AUTOMATIZADO
+       ===================================================================== */
+    function renderCadernoErros() {
+      const container = document.getElementById("erros-container");
+      container.innerHTML = "";
+
+      const wrongQuestions = QUESTIONS.filter(q => {
+        const ans = state.userAnswers[q.id];
+        return ans && !ans.isCorrect;
+      });
+
+      // Atualiza badge de erros
+      const badgeNav = document.getElementById("badge-erros-count");
+      const mBadge = document.getElementById("m-badge-erros");
+      if (wrongQuestions.length > 0) {
+        badgeNav.classList.remove("hidden");
+        badgeNav.innerText = wrongQuestions.length;
+        mBadge.classList.remove("hidden");
+      } else {
+        badgeNav.classList.add("hidden");
+        mBadge.classList.add("hidden");
+      }
+
+      if (wrongQuestions.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="award" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold">Nenhum erro registrado no momento!</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
+              Você não possui erros pendentes de revisão. Continue resolvendo questões na aba de simulados para testar suas fraquezas.
+            </p>
+            <button onclick="navigate('questoes')" class="mt-5 px-5 py-2.5 bg-brand-600 text-white font-bold text-xs rounded-xl hover:bg-brand-700 transition">
+              Ir para o Banco de Questões
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      wrongQuestions.forEach(q => {
+        const mod = MODULES.find(m => m.id === q.moduleId);
+        const card = document.createElement("div");
+        card.className = "bg-white dark:bg-slate-900 rounded-2xl border-2 border-rose-200 dark:border-rose-900/60 p-6 shadow-sm space-y-4";
+        
+        card.innerHTML = `
+          <div class="flex items-center justify-between text-xs pb-3 border-b border-rose-100 dark:border-slate-800">
+            <span class="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
+              <i data-lucide="alert-circle" class="w-4 h-4"></i> Atenção aos Detalhes: ${q.banca} (${q.ano})
+            </span>
+            <span class="text-slate-500">Módulo ${q.moduleId}: ${mod ? mod.title : ''}</span>
+          </div>
+
+          <p class="text-sm sm:text-base font-semibold leading-relaxed text-slate-900 dark:text-slate-100 whitespace-pre-line">${q.enunciado}</p>
+
+          <div class="p-4 bg-rose-50 dark:bg-rose-950/30 rounded-xl border border-rose-200 dark:border-rose-900/40 text-xs sm:text-sm space-y-2">
+            <div class="font-bold text-rose-700 dark:text-rose-300 flex items-center gap-1.5">
+              <i data-lucide="lightbulb" class="w-4 h-4"></i> Por que você errou? Gabarito Comentado:
+            </div>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">${q.explicacao}</p>
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <button onclick="reprovarQuestaoNoCaderno(${q.id})" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3.5 h-3.5"></i> Já entendi a regra! (Superar Erro)
+            </button>
+            <button onclick="openManualModal(${q.moduleId})" class="text-xs text-brand-600 font-bold hover:underline flex items-center gap-1">
+              <i data-lucide="book" class="w-3.5 h-3.5"></i> Revisar Teoria deste Módulo
+            </button>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function reprovarQuestaoNoCaderno(questionId) {
+      delete state.userAnswers[questionId];
+      saveState();
+      renderCadernoErros();
+      updateDashboardMetrics();
+      showToast("Questão resetada para você tentar novamente quando quiser!");
+    }
+
+    function limparCadernoErros() {
+      Object.keys(state.userAnswers).forEach(qid => {
+        if (!state.userAnswers[qid].isCorrect) {
+          delete state.userAnswers[qid];
+        }
+      });
+      saveState();
+      renderCadernoErros();
+      updateDashboardMetrics();
+      showToast("Caderno de erros limpo com sucesso!");
+    }
+
+    /* =====================================================================
+       10. DASHBOARD, GRÁFICOS (CHART.JS) & MÉTRICAS
+       ===================================================================== */
+    let chartInstance = null;
+
+    function updateDashboardMetrics() {
+      const answers = Object.values(state.userAnswers);
+      const totalResolvidas = answers.length;
+      const totalAcertos = answers.filter(a => a.isCorrect).length;
+      const totalErros = answers.filter(a => !a.isCorrect).length;
+      const taxa = totalResolvidas > 0 ? Math.round((totalAcertos / totalResolvidas) * 100) : 0;
+      
+      const modulosConcluidos = Object.values(state.completedModules).filter(Boolean).length;
+      const totalModulos = MODULES.length;
+      const globalProgressPct = Math.round((modulosConcluidos / totalModulos) * 100);
+
+      // Elementos de Texto
+      document.getElementById("stat-total-resolvidas").innerText = totalResolvidas;
+      document.getElementById("stat-banco-total").innerText = QUESTIONS.length;
+      document.getElementById("stat-taxa-acerto").innerText = `${taxa}%`;
+      document.getElementById("stat-total-acertos").innerText = totalAcertos;
+      document.getElementById("stat-total-erros").innerText = totalErros;
+      document.getElementById("stat-modulos-concluidos").innerText = `${modulosConcluidos}/${totalModulos}`;
+      document.getElementById("stat-caderno-erros").innerText = totalErros;
+
+      // Barra global de progresso
+      document.getElementById("global-progress-pct").innerText = `${globalProgressPct}%`;
+      document.getElementById("global-progress-bar").style.width = `${globalProgressPct}%`;
+
+      // Badge no botão de erros
+      const badgeNav = document.getElementById("badge-erros-count");
+      const mBadge = document.getElementById("m-badge-erros");
+      if (totalErros > 0) {
+        badgeNav.classList.remove("hidden");
+        badgeNav.innerText = totalErros;
+        mBadge.classList.remove("hidden");
+      } else {
+        badgeNav.classList.add("hidden");
+        mBadge.classList.add("hidden");
+      }
+
+      // Mini lista de módulos no dashboard
+      const miniList = document.getElementById("dashboard-module-mini-list");
+      miniList.innerHTML = "";
+      MODULES.slice(0, 5).forEach(m => {
+        const isDone = !!state.completedModules[m.id];
+        const row = document.createElement("div");
+        row.className = "flex items-center justify-between text-xs py-1.5 border-b border-slate-100 dark:border-slate-800";
+        row.innerHTML = `
+          <span class="truncate max-w-[200px] text-slate-700 dark:text-slate-300"><b>M${m.id}.</b> ${m.title}</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isDone ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-slate-100 text-slate-500 dark:bg-slate-800'}">
+            ${isDone ? 'Concluído' : 'Pendente'}
+          </span>
+        `;
+        miniList.appendChild(row);
+      });
+
+      renderChart();
+    }
+
+    function renderChart() {
+      const ctx = document.getElementById("performanceChart");
+      if (!ctx) return;
+
+      const labels = MODULES.map(m => `M${m.id}`);
+      const dataSuccess = MODULES.map(m => {
+        const moduleQuestions = QUESTIONS.filter(q => q.moduleId === m.id);
+        const resolved = moduleQuestions.filter(q => !!state.userAnswers[q.id]);
+        if (resolved.length === 0) return 0;
+        const correct = resolved.filter(q => state.userAnswers[q.id].isCorrect).length;
+        return Math.round((correct / resolved.length) * 100);
+      });
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      const isDark = document.documentElement.classList.contains("dark");
+      const textColor = isDark ? '#94a3b8' : '#64748b';
+      const gridColor = isDark ? '#1e293b' : '#f1f5f9';
+
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '% de Acertos por Módulo',
+            data: dataSuccess,
+            backgroundColor: dataSuccess.map(v => v >= 70 ? 'rgba(16, 185, 129, 0.85)' : 'rgba(2, 132, 199, 0.85)'),
+            borderRadius: 8,
+            borderSkipped: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `Aproveitamento: ${ctx.raw}%`
+              }
+            }
+          },
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              ticks: { color: textColor, callback: v => `${v}%` },
+              grid: { color: gridColor }
+            },
+            x: {
+              ticks: { color: textColor, font: { weight: 'bold' } },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    /* =====================================================================
+       11. MODAL HELPERS, TOAST, DARK MODE & IMPORT/EXPORT
+       ===================================================================== */
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.remove("hidden");
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.add("hidden");
+    }
+
+    function toggleDarkMode() {
+      state.darkMode = !state.darkMode;
+      saveState();
+      applyTheme();
+      renderChart();
+    }
+
+    function applyTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById("theme-icon");
+      if (state.darkMode) {
+        html.classList.add("dark");
+        if (icon) icon.setAttribute("data-lucide", "sun");
+      } else {
+        html.classList.remove("dark");
+        if (icon) icon.setAttribute("data-lucide", "moon");
+      }
+      lucide.createIcons();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const msg = document.getElementById("toast-msg");
+      msg.innerText = message;
+      toast.classList.remove("translate-y-20", "opacity-0");
+      setTimeout(() => {
+        toast.classList.add("translate-y-20", "opacity-0");
+      }, 3200);
+    }
+
+    function exportDataJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `gabarita_portugues_backup_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast("Download do backup concluído!");
+    }
+
+    function importDataJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported.userAnswers && imported.completedModules) {
+            state = { ...state, ...imported };
+            saveState();
+            applyTheme();
+            updateDashboardMetrics();
+            renderModules();
+            renderQuestionsList();
+            closeModal("backup-modal");
+            showToast("Progresso importado com sucesso! 🚀");
+          } else {
+            showToast("Arquivo JSON inválido.");
+          }
+        } catch (err) {
+          showToast("Erro ao processar arquivo JSON.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetAllProgress() {
+      if (window.confirm && !window.confirm("Deseja realmente apagar todo o histórico de questões e progresso dos módulos?")) {
+        return;
+      }
+      state.userAnswers = {};
+      state.completedModules = {};
+      state.streakDays = 1;
+      saveState();
+      updateDashboardMetrics();
+      renderModules();
+      renderQuestionsList();
+      closeModal("backup-modal");
+      showToast("Todos os dados foram redefinidos.");
+    }
+
+    /* =====================================================================
+       12. INICIALIZAÇÃO NO LOAD DA PÁGINA
+       ===================================================================== */
+    window.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      populateFilterModulesSelect();
+      renderModules();
+      updateDashboardMetrics();
+      renderQuestionsList();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
+```
