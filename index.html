@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GabaritaPortuguês | Plataforma de Estudos</title>
+  <title>GabaritaPortuguês | Plataforma Completa de Estudos</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
       padding: 0 1rem;
     }
 
-    /* Cabeçalho e Navegação */
+    /* Cabeçalho */
     header {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
@@ -270,7 +270,61 @@
       font-weight: 700;
     }
 
-    /* Modal de Vídeo */
+    /* Estilização do Mapa Mental */
+    .mindmap-box {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .mindmap-root {
+      background: #0284c7;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 0.6rem 1rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+    }
+
+    .mindmap-branches {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 600px) {
+      .mindmap-branches {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .mindmap-node {
+      background: #ffffff;
+      border-left: 4px solid #0284c7;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    .mindmap-node-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #0369a1;
+      margin-bottom: 0.25rem;
+    }
+
+    .mindmap-node-desc {
+      font-size: 0.75rem;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    /* Modal */
     .modal {
       position: fixed;
       inset: 0;
@@ -315,25 +369,6 @@
       border: none;
     }
 
-    .custom-link-box {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      padding: 0.75rem 1rem;
-      border-radius: 0.6rem;
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .custom-link-box input {
-      padding: 0.45rem 0.75rem;
-      border: 1px solid #94a3b8;
-      border-radius: 0.4rem;
-      font-size: 0.8rem;
-      width: 100%;
-    }
-
     .hidden {
       display: none !important;
     }
@@ -350,8 +385,8 @@
 
       <nav class="nav-menu">
         <button id="btn-dashboard" class="nav-item active" onclick="trocarAba('dashboard')">Dashboard</button>
-        <button id="btn-trilha" class="nav-item" onclick="trocarAba('trilha')">Módulos & Vídeos</button>
-        <button id="btn-questoes" class="nav-item" onclick="trocarAba('questoes')">Questões</button>
+        <button id="btn-trilha" class="nav-item" onclick="trocarAba('trilha')">Módulos, Aulas & Mapas</button>
+        <button id="btn-questoes" class="nav-item" onclick="trocarAba('questoes')">Banco de Questões</button>
         <button id="btn-erros" class="nav-item" onclick="trocarAba('erros')">Caderno de Erros</button>
       </nav>
     </div>
@@ -364,11 +399,11 @@
       <div class="banner">
         <div>
           <h1>Plataforma de Língua Portuguesa</h1>
-          <p>Trilha pedagógica com videoaulas integradas e resolução comentada.</p>
+          <p>Trilha pedagógica com videoaulas integradas, mapas mentais esquematizados e questões comentadas.</p>
         </div>
         <div class="banner-buttons">
           <button class="btn-action" onclick="trocarAba('questoes')">Treinar Questões</button>
-          <button class="btn-action btn-action-alt" onclick="trocarAba('trilha')">Ver Aulas</button>
+          <button class="btn-action btn-action-alt" onclick="trocarAba('trilha')">Ver Aulas & Mapas</button>
         </div>
       </div>
 
@@ -407,7 +442,7 @@
     <div id="view-trilha" class="hidden">
       <div style="margin: 1.5rem 0;">
         <h2 style="font-size: 1.5rem; font-weight: 800;">Trilha Oficial dos Módulos</h2>
-        <p style="color: #64748b; font-size: 0.9rem;">Toque no módulo para ver a aula em vídeo e as regras essenciais.</p>
+        <p style="color: #64748b; font-size: 0.9rem;">Toque no módulo para ver a videoaula, o mapa mental esquemático e as regras principais.</p>
       </div>
 
       <div class="mod-grid" id="lista-modulos"></div>
@@ -415,9 +450,11 @@
 
     <!-- ABA 3: QUESTÕES -->
     <div id="view-questoes" class="hidden">
-      <div style="margin: 1.5rem 0;">
-        <h2 style="font-size: 1.5rem; font-weight: 800;">Banco de Questões Comentadas</h2>
-        <p style="color: #64748b; font-size: 0.9rem;">Treine com foco em bancas examinadoras reais.</p>
+      <div style="margin: 1.5rem 0; display: flex; flex-direction: column; sm:flex-row; justify-content: space-between; gap: 1rem;">
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800;">Banco de Questões Comentadas</h2>
+          <p style="color: #64748b; font-size: 0.9rem;">Treine com foco em bancas organizadoras reais: Cebraspe, FCC, FGV e Vunesp.</p>
+        </div>
       </div>
 
       <div id="lista-questoes"></div>
@@ -428,7 +465,7 @@
       <div style="margin: 1.5rem 0; background: #fef2f2; border: 1px solid #fecaca; padding: 1.25rem; border-radius: 1rem;">
         <h2 style="font-size: 1.25rem; font-weight: 800; color: #991b1b;">Caderno de Erros Automatizado</h2>
         <p style="color: #7f1d1d; font-size: 0.85rem; margin-top: 0.25rem;">
-          Questões respondidas incorretamente ficam aqui para revisão e fixação.
+          Questões respondidas incorretamente ficam aqui guardadas para fixação e superação de pontos fracos.
         </p>
       </div>
 
@@ -437,7 +474,7 @@
 
   </main>
 
-  <!-- MODAL DE VÍDEO -->
+  <!-- MODAL DE VÍDEO, REGRAS E MAPA MENTAL -->
   <div class="modal" id="modal-video" onclick="fecharVideo(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div style="padding: 1rem 1.25rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
@@ -452,22 +489,22 @@
         <!-- Reprodutor de Vídeo -->
         <div class="video-wrap" id="mv-player"></div>
 
-        <!-- Botão direto para o YouTube -->
         <div style="margin-top: 0.75rem; display: flex; justify-content: flex-end;">
-          <a id="mv-yt-direct" href="#" target="_blank" style="font-size: 0.8rem; font-weight: 700; color: #ef4444; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+          <a id="mv-yt-direct" href="#" target="_blank" style="font-size: 0.8rem; font-weight: 700; color: #ef4444; text-decoration: none;">
             Assistir diretamente no YouTube ↗
           </a>
         </div>
 
-        <!-- Opção de Alterar Vídeo -->
-        <div class="custom-link-box">
-          <span style="font-size: 0.75rem; font-weight: 700; color: #475569;">Deseja trocar esta videoaula por outra do YouTube?</span>
-          <div style="display: flex; gap: 0.5rem;">
-            <input type="text" id="input-yt-url" placeholder="Cole o link do YouTube aqui (ex: https://youtu.be/...)">
-            <button class="btn-action" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" onclick="salvarNovoVideo()">Salvar</button>
+        <!-- SEÇÃO: MAPA MENTAL ESQUEMATIZADO -->
+        <div class="mindmap-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #0284c7;">🧠 Mapa Mental & Esquema Rápido</span>
           </div>
+          <div class="mindmap-root" id="mm-raiz">Assunto Central</div>
+          <div class="mindmap-branches" id="mm-ramos"></div>
         </div>
 
+        <!-- REGRAS DE OURO -->
         <div style="margin-top: 1.25rem;">
           <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Regras de Ouro:</h4>
           <ul id="mv-regras" style="padding-left: 1.25rem; font-size: 0.85rem; color: #475569; line-height: 1.6;"></ul>
@@ -484,62 +521,394 @@
   </div>
 
   <script>
-    // LISTA DOS 12 MÓDULOS COM IDS ATIVOS E TESTADOS
+    // DADOS DOS 12 MÓDULOS COM AULAS E MAPAS MENTAIS
     const DADOS_MODULOS = [
-      { id: 1, titulo: "Fonologia & Ortografia Oficial", yt: "aZQkWn7il-E", regras: ["Todas as proparoxítonas são acentuadas sem exceção.", "Oxítonas acentuam-se terminadas em A, E, O (s), EM, ENS.", "Ditongos abertos ÉI e ÓI perderam acento nas paroxítonas (ideia, jiboia)."] },
-      { id: 2, titulo: "Morfologia I: Classes Nominais", yt: "ltrzPijgKi4", regras: ["Substantivos nomeiam seres; adjetivos atribuem qualidades e restrições.", "Pronomes demonstrativos: 'Este' (presente/perto), 'Esse' (passado recente), 'Aquele' (longe)."] },
-      { id: 3, titulo: "Morfologia II: Tempos e Modos Verbais", yt: "--7NjUpDJLs", regras: ["Futuro do Pretérito: Fatos dependentes de condição ('Se estudasse, passaria').", "Verbos ver e vir: 'Quando eu vir' (ver) vs 'Quando eu vier' (vir)."] },
-      { id: 4, titulo: "Morfologia III: Conjunções & Conectivos", yt: "B43FpJSh3xM", regras: ["Concessivas (embora, conquanto) estabelecem quebra de expectativa sem anular o fato.", "'Pois' antes do verbo é causal/explicativo; após o verbo é conclusivo."] },
-      { id: 5, titulo: "Sintaxe I: Termos da Oração", yt: "1MdkYYJrims", regras: ["O sujeito jamais é preposicionado.", "O verbo 'haver' no sentido de existir é impessoal: fica sempre no singular."] },
-      { id: 6, titulo: "Sintaxe II: Complemento Nominal vs Adjunto", yt: "ircd16eaxYo", regras: ["Complemento Nominal completa substantivos abstratos, adjetivos e advérbios (valor passivo).", "Adjunto Adnominal possui valor ativo de agente ou posse."] },
-      { id: 7, titulo: "Sintaxe do Período Composto", yt: "-T_BKoDFkZ8", regras: ["Oração substantiva pode ser mentalmente substituída por 'ISSO'.", "Oração adjetiva explicativa vem entre vírgulas; restritiva não tem vírgula."] },
-      { id: 8, titulo: "Concordância Verbal e Nominal", yt: "C8JPK8vBfa0", regras: ["Verbo + SE + sujeito sem preposição: Partícula Apassivadora ('Vendem-se casas').", "'Faz' e 'Há' indicando tempo decorrido são impessoais."] },
-      { id: 9, titulo: "Regência e Uso da Crase", yt: "x7upR1wDSSo", regras: ["Proibida crase antes de termos masculinos e verbos.", "Facultativa antes de nomes próprios femininos, possessivos femininos singulares e 'até'."] },
-      { id: 10, titulo: "Pontuação & Emprego da Vírgula", yt: "G8Stjzy-87k", regras: ["Nunca separar o sujeito do verbo por vírgula.", "Adjuntos adverbiais deslocados longos exigem vírgula obrigatória."] },
-      { id: 11, titulo: "Colocação Pronominal", yt: "x7upR1wDSSo", regras: ["Não se inicia frase na norma culta com pronome oblíquo átono.", "Palavras negativas e advérbios atraem próclise obrigatoriamente."] },
-      { id: 12, titulo: "Interpretação Textual & Tipologia", yt: "-T_BKoDFkZ8", regras: ["Compreensão: O que está escrito explicitamente no texto.", "Interpretação: Dedução e inferência lógica autorizada pelo texto."] }
+      {
+        id: 1,
+        titulo: "Fonologia & Ortografia Oficial",
+        yt: "aZQkWn7il-E",
+        regras: [
+          "Todas as proparoxítonas são acentuadas sem exceção (ex.: lâmpada, álibi).",
+          "Oxítonas acentuam-se terminadas em A, E, O (s), EM, ENS.",
+          "Ditongos abertos ÉI e ÓI perderam acento nas paroxítonas (ideia, jiboia), mas mantêm em oxítonas (herói, papéis)."
+        ],
+        mapa: {
+          raiz: "Acentuação & Ortografia",
+          ramos: [
+            { titulo: "Proparoxítonas", desc: "100% acentuadas. Antepenúltima sílaba tônica (médico, tráfego)." },
+            { titulo: "Oxítonas", desc: "Acentua: terminadas em A, E, O (+S), EM, ENS (café, vatapá, parabéns)." },
+            { titulo: "Paroxítonas", desc: "Acentua as terminadas em R, X, N, L, PS, Ditongo (túnel, tórax, história)." },
+            { titulo: "Hiatos I e U", desc: "Acentua I e U tônicos sozinhos na sílaba (sa-ú-de, fa-ís-ca). Não acentua antes de NH." }
+          ]
+        }
+      },
+      {
+        id: 2,
+        titulo: "Morfologia I: Classes Nominais",
+        yt: "ltrzPijgKi4",
+        regras: [
+          "Substantivo é o núcleo nominal; adjetivos e artigos subordinam-se a ele.",
+          "Pronomes demonstrativos espaciais: Este (emissor/aqui), Esse (receptor/aí), Aquele (distante de ambos/lá).",
+          "Adjetivos de relação não admitem intensificação com 'muito' ('energia muito solar' está incorreto)."
+        ],
+        mapa: {
+          raiz: "Classes Nominais",
+          ramos: [
+            { titulo: "Substantivo", desc: "Nomeia seres, ações, estados. Núcleo dos termos da oração." },
+            { titulo: "Adjetivo", desc: "Modifica o substantivo atribuindo qualidade, estado ou relação." },
+            { titulo: "Pronomes", desc: "Retomam (anáfora) ou antecipam (catáfora) termos no texto." },
+            { titulo: "Artigo & Numeral", desc: "Artigo define/indefine; numeral expressa quantidade ou ordem." }
+          ]
+        }
+      },
+      {
+        id: 3,
+        titulo: "Morfologia II: Tempos e Modos Verbais",
+        yt: "--7NjUpDJLs",
+        regras: [
+          "Futuro do Pretérito: Fatos dependentes de condição ('Se estudasse, passaria').",
+          "Pretérito Mais-que-Perfeito: Ação passada concluída antes de outra ação passada ('Quando cheguei, o trem já partira').",
+          "Verbo ver vs vir no subjuntivo: 'Quando eu VIR' (ver) vs 'Quando eu VIER' (vir)."
+        ],
+        mapa: {
+          raiz: "Modos e Tempos Verbais",
+          ramos: [
+            { titulo: "Modo Indicativo", desc: "Certeza, fatos reais. Tempos: Presente, Pretéritos (Perf, Imperf, M-q-P) e Futuros." },
+            { titulo: "Modo Subjuntivo", desc: "Dúvida, hipótese, desejo. Tempos: Presente, Pretérito Imperfeito e Futuro." },
+            { titulo: "Modo Imperativo", desc: "Ordem, pedido, instrução (Afirmativo / Negativo)." },
+            { titulo: "Correlação Verbal", desc: "Harmonia obrigatória: Se eu PUDESSE (imperf. subj.), eu FARIA (fut. pretérito)." }
+          ]
+        }
+      },
+      {
+        id: 4,
+        titulo: "Morfologia III: Conjunções & Conectivos",
+        yt: "B43FpJSh3xM",
+        regras: [
+          "Concessivas (embora, conquanto) indicam quebra de expectativa sem invalidar a oração principal.",
+          "Adversativas (mas, porém, contudo) opõem ideias frontalmente.",
+          "'Pois' antes do verbo é causal/explicativo; 'pois' entre vírgulas após o verbo é conclusivo."
+        ],
+        mapa: {
+          raiz: "Conjunções da Prova",
+          ramos: [
+            { titulo: "Adversativas", desc: "Mas, porém, todavia, contudo, entretanto (oposição pura)." },
+            { titulo: "Concessivas", desc: "Embora, conquanto, ainda que, mesmo que (quebra esperada)." },
+            { titulo: "Causais", desc: "Porque, já que, visto que, como (no início da frase)." },
+            { titulo: "Consecutivas", desc: "Tanto... que, tão... que (efeito gerado pela causa)." }
+          ]
+        }
+      },
+      {
+        id: 5,
+        titulo: "Sintaxe I: Termos da Oração",
+        yt: "1MdkYYJrims",
+        regras: [
+          "O sujeito nunca é regido por preposição.",
+          "Verbo 'haver' com sentido de existir é impessoal: sem sujeito e sempre no singular.",
+          "Predicado nominal possui verbo de ligação + predicativo do sujeito."
+        ],
+        mapa: {
+          raiz: "Termos da Oração",
+          ramos: [
+            { titulo: "Sujeito", desc: "Simples, composto, indeterminado ou oração sem sujeito." },
+            { titulo: "Transitividade", desc: "VTD (objeto direto sem prep.) e VTI (objeto indireto com prep.)." },
+            { titulo: "Predicado", desc: "Verbal (verbo de ação), Nominal (ligação) ou Verbo-Nominal." },
+            { titulo: "Agente da Passiva", desc: "Pratica a ação na voz passiva analítica (introduzido por 'por'/'de')." }
+          ]
+        }
+      },
+      {
+        id: 6,
+        titulo: "Sintaxe II: Complemento Nominal vs Adjunto",
+        yt: "ircd16eaxYo",
+        regras: [
+          "Complemento Nominal completa adjetivos, advérbios e substantivos abstratos com sentido passivo.",
+          "Adjunto Adnominal acompanha substantivos concretos ou abstratos com sentido ativo/posse.",
+          "Ligado a adjetivo ou advérbio? É sempre Complemento Nominal."
+        ],
+        mapa: {
+          raiz: "CN vs Adjunto Adnominal",
+          ramos: [
+            { titulo: "Alvo / Ligação", desc: "CN: Substantivo Abstrato, Adjetivo ou Advérbio. Adjunto: Substantivo Concreto ou Abstrato." },
+            { titulo: "Preposição", desc: "CN é SEMPRE preposicionado. Adjunto pode ter ou não preposição." },
+            { titulo: "Sentido Paciente", desc: "'A destruição da cidade' = a cidade sofre a ação (Complemento Nominal)." },
+            { titulo: "Sentido Agente", desc: "'O amor de mãe' = a mãe ama/posse (Adjunto Adnominal)." }
+          ]
+        }
+      },
+      {
+        id: 7,
+        titulo: "Sintaxe do Período Composto",
+        yt: "-T_BKoDFkZ8",
+        regras: [
+          "Oração subordinada substantiva pode ser mentalmente substituída pelo pronome 'ISSO'.",
+          "Oração adjetiva explicativa vem entre vírgulas (refere-se à totalidade).",
+          "Oração adjetiva restritiva NÃO tem vírgulas (delimita um grupo específico)."
+        ],
+        mapa: {
+          raiz: "Período Composto",
+          ramos: [
+            { titulo: "Coordenação", desc: "Orações independentes: Sindéticas (com conjunção) e Assindéticas (sem conjunção)." },
+            { titulo: "Substantivas", desc: "Subjetiva, Objetiva Direta, Objetiva Indireta, Completiva Nominal, Predicativa." },
+            { titulo: "Adjetivas", desc: "Iniciadas por pronome relativo: Explicativas (com vírgula) vs Restritivas (sem vírgula)." },
+            { titulo: "Adverbiais", desc: "Exercem papel de adjunto adverbial: causal, condicional, temporal, concessiva, etc." }
+          ]
+        }
+      },
+      {
+        id: 8,
+        titulo: "Concordância Verbal e Nominal",
+        yt: "C8JPK8vBfa0",
+        regras: [
+          "Verbo + SE + sujeito sem preposição: Partícula Apassivadora ('Vendem-se casas').",
+          "Verbo + SE + preposição: Índice de Indeterminação do Sujeito ('Precisa-se de funcionários' - singular fixo).",
+          "'Fazer' indicando tempo decorrido não vai para o plural ('Faz dois anos')."
+        ],
+        mapa: {
+          raiz: "Concordância Prática",
+          ramos: [
+            { titulo: "Partícula SE", desc: "Apassivador = concorda com o sujeito. Índice de indeterminação = verbo no singular." },
+            { titulo: "Verbos Impessoais", desc: "Haver (existir) e Fazer (tempo) ficam fixos na 3ª pessoa do singular." },
+            { titulo: "Expressões Partitivas", desc: "'A maioria dos alunos' aceita concordância no singular ou no plural." },
+            { titulo: "Concordância Nominal", desc: "O adjetivo concorda em gênero e número com os substantivos a que se refere." }
+          ]
+        }
+      },
+      {
+        id: 9,
+        titulo: "Regência e Uso da Crase",
+        yt: "x7upR1wDSSo",
+        regras: [
+          "Crase Proibida: antes de termos masculinos, antes de verbos e antes de pronomes pessoais.",
+          "Crase Facultativa: antes de nomes próprios femininos, possessivos femininos singulares e após 'até'.",
+          "Verbo aspirar: sentido de almejar exige preposição 'a' ('Aspiro ao cargo público')."
+        ],
+        mapa: {
+          raiz: "Regência e Crase",
+          ramos: [
+            { titulo: "Condição Básica", desc: "Preposição A (exigida pelo termo regente) + Artigo feminino A/As." },
+            { titulo: "Crase Proibida", desc: "Antes de masculino, verbos, pronomes de tratamento e 'a' singular diante de plural." },
+            { titulo: "Crase Facultativa", desc: "Nomes próprios femininos, pronomes possessivos femininos singulares e após 'até'." },
+            { titulo: "Locuções Femininas", desc: "À tarde, às pressas, à medida que, à queima-roupa levam crase obrigatória." }
+          ]
+        }
+      },
+      {
+        id: 10,
+        titulo: "Pontuação & Emprego da Vírgula",
+        yt: "G8Stjzy-87k",
+        regras: [
+          "Regra capital: Nunca separar sujeito do predicado nem verbo do seu complemento por vírgula.",
+          "Adjuntos adverbiais deslocados longos (três ou mais palavras) exigem vírgula obrigatória.",
+          "Vocativo é sempre isolado por pontuação."
+        ],
+        mapa: {
+          raiz: "Uso da Vírgula",
+          ramos: [
+            { titulo: "Proibições Capitais", desc: "Sujeito e Verbo / Verbo e Objeto / Nome e Complemento Nominal." },
+            { titulo: "Isolamento Obrigatório", desc: "Vocativo, aposto explicativo, orações adjetivas explicativas." },
+            { titulo: "Adjunto Deslocado", desc: "No início ou meio da frase: vírgula obrigatória se longo; facultativa se curto." },
+            { titulo: "Vírgula antes do E", desc: "Permitida se as orações coordenadas possuírem sujeitos diferentes." }
+          ]
+        }
+      },
+      {
+        id: 11,
+        titulo: "Colocação Pronominal",
+        yt: "x7upR1wDSSo",
+        regras: [
+          "Início de período na norma culta nunca aceita próclise ('Apresente-me', não 'Me apresente').",
+          "Palavras atrativas obrigam a próclise: palavras negativas, advérbios, pronomes relativos e conjunções.",
+          "Futuros do presente e do pretérito sem palavra atrativa exigem mesóclise ('Realizar-se-á')."
+        ],
+        mapa: {
+          raiz: "Colocação Pronominal",
+          ramos: [
+            { titulo: "Próclise (Antes)", desc: "Palavra negativa, advérbio, pronome indefinido/relativo e conjunções subordinativas." },
+            { titulo: "Ênclise (Depois)", desc: "Início de frase, orações imperativas afirmativas e após pausa por vírgula." },
+            { titulo: "Mesóclise (Meio)", desc: "Com verbos no Futuro do Presente ou Futuro do Pretérito sem palavra atrativa." },
+            { titulo: "Particípio Passado", desc: "O pronome NUNCA se posiciona em ênclise após verbo no particípio." }
+          ]
+        }
+      },
+      {
+        id: 12,
+        titulo: "Interpretação Textual & Tipologia",
+        yt: "-T_BKoDFkZ8",
+        regras: [
+          "Compreensão de Texto: Localização do que está expresso pelo autor ('O texto diz...', 'Segundo o autor...').",
+          "Interpretação de Texto: Dedução lógica sustentada pelos indícios do texto ('Infere-se', 'Conclui-se').",
+          "Evite a extrapolação: não insira conhecimentos de mundo externos que o texto não autorize."
+        ],
+        mapa: {
+          raiz: "Texto & Interpretação",
+          ramos: [
+            { titulo: "Tipologia Textual", desc: "Narrativo (tempo/enredo), Dissertativo (tese/argumento) e Injuntivo (instrução)." },
+            { titulo: "Níveis de Leitura", desc: "Compreensão (explícito) vs Interpretação (implícito/inferencial)." },
+            { titulo: "Mecanismos de Coesão", desc: "Anáfora (retoma elemento anterior) e Catáfora (apresenta elemento posterior)." },
+            { titulo: "Erros Comuns", desc: "Extrapolação (ir além do texto), Redução (ignorar partes) e Contradição (inverter a tese)." }
+          ]
+        }
+      }
     ];
 
+    // BANCO EXPANDIDO DE QUESTÕES REAIS DE CONCURSOS
     const DADOS_QUESTOES = [
       {
         id: 1,
         moduloId: 1,
         banca: "Cebraspe",
         ano: 2024,
-        enunciado: "Julgue o item: As palavras 'estratégia', 'indivíduo' e 'família' recebem acento com base na mesma regra fonológica, admitindo a classificação de paroxítonas terminadas em ditongo oral crescente.",
+        enunciado: "Julgue o item a seguir a respeito de fonologia e ortografia:\n\nAs palavras 'estratégia', 'indivíduo' e 'família' recebem acento gráfico com base na mesma regra fonológica, admitindo a classificação de paroxítonas terminadas em ditongo oral crescente.",
         opcoes: ["Certo", "Errado"],
         gabarito: "Certo",
-        comentario: "Correto! O Cebraspe adota a classificação de que paroxítonas terminadas em ditongo oral crescente também são chamadas de proparoxítonas eventuais."
+        comentario: "Correto! O Cebraspe adota a teoria consagrada de Evanildo Bechara: paroxítonas terminadas em ditongo crescente também são classificadas como proparoxítonas acidentais ou eventuais."
       },
       {
         id: 2,
-        moduloId: 4,
-        banca: "FGV",
+        moduloId: 1,
+        banca: "Vunesp",
         ano: 2023,
-        enunciado: "Assinale a alternativa em que o termo em destaque expressa sentido de CONCESSÃO:",
+        enunciado: "Assinale a alternativa em que todas as palavras estão corretamente acentuadas segundo o Acordo Ortográfico vigente:",
         opcoes: [
-          "A) Como choveu copiosamente, a sessão foi cancelada.",
-          "B) Conquanto houvesse poucas vagas, o candidato persistiu nos estudos.",
-          "C) Caso obtenha a nota mínima, será convocado para o teste físico.",
-          "D) Estudou com afinco para que obtivesse êxito na carreira."
+          "A) Idéia, jibóia, herói, pastéis.",
+          "B) Assembleia, plateia, heróico, paranóia.",
+          "C) Heroico, assembleia, troféu, pastéis.",
+          "D) Vôo, crêem, leem, enjôo."
         ],
-        gabarito: "B) Conquanto houvesse poucas vagas, o candidato persistiu nos estudos.",
-        comentario: "'Conquanto' é conjunção subordinativa concessiva por excelência."
+        gabarito: "C) Heroico, assembleia, troféu, pastéis.",
+        comentario: "Na C, os ditongos abertos éi e ói perderam o acento nas paroxítonas (heroico, assembleia), mas mantiveram o acento nas oxítonas e monossílabos (troféu, pastéis). As formas com duplo o e e não levam mais acento circunflexo (voo, creem)."
       },
       {
         id: 3,
+        moduloId: 2,
+        banca: "FGV",
+        ano: 2023,
+        enunciado: "Assinale a opção em que a troca de posição do adjetivo acarreta mudança de classe ou sentido substancial da frase:",
+        opcoes: [
+          "A) Ele era um homem pobre / Ele era um pobre homem.",
+          "B) Adquiriu um carro novo / Adquiriu um novo carro.",
+          "C) Tomou uma decisão justa / Tomou uma justa decisão.",
+          "D) Realizou uma viagem longa / Realizou uma longa viagem."
+        ],
+        gabarito: "A) Ele era um homem pobre / Ele era um pobre homem.",
+        comentario: "'Homem pobre' refere-se à ausência de posses financeiras (sentido objetivo). 'Pobre homem' assume valor semântico de coitado ou digno de piedade (sentido afetivo/subjetivo)."
+      },
+      {
+        id: 4,
+        moduloId: 4,
+        banca: "FGV",
+        ano: 2024,
+        enunciado: "Assinale a alternativa em que o conector expressa sentido estrito de CONCESSÃO:",
+        opcoes: [
+          "A) Como choveu torrencialmente, o trânsito da cidade parou.",
+          "B) Conquanto houvesse poucas vagas, o candidato persistiu na preparação.",
+          "C) Caso obtenha aprovação, assumirá o cargo no próximo semestre.",
+          "D) Estudou com afinco para que obtivesse a classificação desejada."
+        ],
+        gabarito: "B) Conquanto houvesse poucas vagas, o candidato persistiu na preparação.",
+        comentario: "'Conquanto' é conjunção subordinativa concessiva por excelência (equivale a 'embora' ou 'ainda que'). A alternativa A é causal, C é condicional e D é final."
+      },
+      {
+        id: 5,
+        moduloId: 5,
+        banca: "Cebraspe",
+        ano: 2024,
+        enunciado: "Julgue o item quanto à análise sintática dos termos:\n\nNa frase 'Houve manifestações pacíficas no plenário da câmara', o termo 'manifestações pacíficas' funciona sintaticamente como sujeito da oração.",
+        opcoes: ["Certo", "Errado"],
+        gabarito: "Errado",
+        comentario: "Errado! O verbo 'haver' com o sentido de existir ou ocorrer é impessoal. Ele não admite sujeito; 'manifestações pacíficas' funciona como Objeto Direto de uma oração sem sujeito."
+      },
+      {
+        id: 6,
+        moduloId: 6,
+        banca: "FCC",
+        ano: 2023,
+        enunciado: "Na frase 'A resposta do professor satisfez a expectativa dos concursandos', os termos sublinhados classificam-se, correta e respectivamente, como:",
+        opcoes: [
+          "A) Adjunto adnominal e complemento nominal.",
+          "B) Complemento nominal e adjunto adnominal.",
+          "C) Adjunto adnominal e adjunto adnominal.",
+          "D) Complemento nominal e complemento nominal."
+        ],
+        gabarito: "A) Adjunto adnominal e complemento nominal.",
+        comentario: "'Do professor' tem valor ativo (o professor respondeu/agente) = Adjunto Adnominal. 'Dos concursandos' completa o substantivo abstrato 'expectativa' com valor paciente (eles são alvo da expectativa) = Complemento Nominal."
+      },
+      {
+        id: 7,
+        moduloId: 7,
+        banca: "Cebraspe",
+        ano: 2024,
+        enunciado: "Julgue o item quanto à pontuação e ao sentido:\n\n'Os servidores públicos federais, que realizaram a capacitação no órgão, receberam a progressão de carreira.'\n\nA supressão de ambas as vírgulas que isolam a oração adjetiva manteria a correção gramatical do texto, mas alteraria seu sentido original.",
+        opcoes: ["Certo", "Errado"],
+        gabarito: "Certo",
+        comentario: "Certo! Com vírgulas, a oração é explicativa (todos os servidores realizaram a capacitação). Sem as vírgulas, ela vira restritiva (apenas o grupo específico que fez a capacitação recebeu a progressão)."
+      },
+      {
+        id: 8,
         moduloId: 8,
         banca: "FCC",
         ano: 2023,
-        enunciado: "A concordância verbal e nominal está de acordo com o padrão culto na opção:",
+        enunciado: "A concordância verbal e nominal está de pleno acordo com a norma-padrão na frase:",
         opcoes: [
-          "A) Devem haver muitos candidatos aguardando o resultado oficial.",
-          "B) Tratam-se de processos arquivados pelo magistrado.",
-          "C) Alugam-se salas comerciais totalmente equipadas.",
-          "D) Faziam dez dias que o laudo pericial não era emitido."
+          "A) Devem haver muitos candidatos aprovados neste concurso.",
+          "B) Tratam-se de processos antigos arquivados pelo tribunal.",
+          "C) Alugam-se salas comerciais totalmente equipadas no centro.",
+          "D) Faziam dez dias que o gabarito preliminar não era divulgado."
         ],
-        gabarito: "C) Alugam-se salas comerciais totalmente equipadas.",
-        comentario: "Na C, a partícula 'se' é apassivadora: salas comerciais são alugadas (concordância no plural correta)."
+        gabarito: "C) Alugam-se salas comerciais totalmente equipadas no centro.",
+        comentario: "Na C, a partícula 'se' é apassivadora (salas comerciais são alugadas), exigindo verbo no plural. Erros: A) 'Deve haver' (impessoal transmite impessoalidade ao auxiliar); B) 'Trata-se de' (sujeito indeterminado com preposição); D) 'Fazia dez dias' (tempo decorrido é impessoal)."
+      },
+      {
+        id: 9,
+        moduloId: 9,
+        banca: "Vunesp",
+        ano: 2024,
+        enunciado: "Assinale a alternativa em que o sinal indicativo de crase está empregado em estrita conformidade com a norma-padrão:",
+        opcoes: [
+          "A) O policial dirigiu-se à ela com toda a cortesia necessária.",
+          "B) A viatura retornou à base logo após o encerramento da diligência.",
+          "C) A equipe estava disposta à colaborar com os peritos criminais.",
+          "D) Encaminhou o processo à uma repartição do Ministério Público."
+        ],
+        gabarito: "B) A viatura retornou à base logo após o encerramento da diligência.",
+        comentario: "B está correta: quem retorna, retorna 'a' (preposição) + 'a base' (substantivo feminino com artigo) = à base. Erros: crase proibida antes de pronome pessoal (ela), antes de verbo (colaborar) e antes de artigo indefinido (uma)."
+      },
+      {
+        id: 10,
+        moduloId: 10,
+        banca: "FGV",
+        ano: 2023,
+        enunciado: "Assinale a frase em que o emprego da vírgula está inteiramente correto:",
+        opcoes: [
+          "A) O auditor fiscal, analisou todos os documentos contábeis da empresa.",
+          "B) No início da manhã desta quinta-feira, os policiais cumpriram mandados judiciais.",
+          "C) Os alunos leram os manuais teóricos, com muita atenção e disciplina.",
+          "D) O candidato comprou, cadernos canetas e livros de revisão."
+        ],
+        gabarito: "B) No início da manhã desta quinta-feira, os policiais cumpriram mandados judiciais.",
+        comentario: "B está correta: isola adjunto adverbial de tempo deslocado de longa extensão. Erros: A separa sujeito e verbo; C separa verbo do seu adjunto de modo imediato de forma indevida; D separa verbo de objetos diretos."
+      },
+      {
+        id: 11,
+        moduloId: 11,
+        banca: "Cebraspe",
+        ano: 2023,
+        enunciado: "Julgue o item quanto à colocação pronominal:\n\n'Nunca enganou-se a respeito das dificuldades inerentes ao concurso militar.'\n\nNo texto, a posição do pronome oblíquo obedece às regras prescritas pela norma culta da língua portuguesa.",
+        opcoes: ["Certo", "Errado"],
+        gabarito: "Errado",
+        comentario: "Errado! A palavra 'Nunca' possui sentido negativo e atua como palavra atrativa obrigatória, exigindo próclise: 'Nunca se enganou'."
+      },
+      {
+        id: 12,
+        moduloId: 12,
+        banca: "Cebraspe",
+        ano: 2024,
+        enunciado: "Julgue o item a respeito dos conceitos de tipologia e interpretação textual:\n\nA inferência autorizada em uma questão de prova fundamenta-se nas informações contextuais e pressupostos fornecidos pelo texto, diferenciando-se da extrapolação, que insere ideias alheias à argumentação do autor.",
+        opcoes: ["Certo", "Errado"],
+        gabarito: "Certo",
+        comentario: "Certo! Interpretação exige dedução fundamentada em pistas linguísticas do texto. A extrapolação é o erro comum de deduzir além do que as evidências do texto autorizam."
       }
     ];
 
@@ -547,12 +916,11 @@
       respostas: {},
       concluidos: [],
       erros: [],
-      modAtual: null,
-      videosPersonalizados: {}
+      modAtual: null
     };
 
     function carregarDados() {
-      const salvo = localStorage.getItem("gabarita_pt_custom_v2");
+      const salvo = localStorage.getItem("gabarita_pt_final_v3");
       if (salvo) {
         try { estado = Object.assign(estado, JSON.parse(salvo)); } catch(e){}
       }
@@ -563,7 +931,7 @@
     }
 
     function salvarDados() {
-      localStorage.setItem("gabarita_pt_custom_v2", JSON.stringify(estado));
+      localStorage.setItem("gabarita_pt_final_v3", JSON.stringify(estado));
       atualizarDashboard();
     }
 
@@ -598,14 +966,14 @@
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
               <span class="mod-tag">MÓDULO ${String(m.id).padStart(2, '0')}</span>
-              <span style="font-size: 0.75rem; color: #ef4444; font-weight: 700;">▶ Videoaula</span>
+              <span style="font-size: 0.75rem; color: #0284c7; font-weight: 700;">🧠 Mapa + Aula</span>
             </div>
             <h3 style="font-weight: 800; font-size: 1rem; margin: 0.35rem 0;">${m.titulo}</h3>
             <p style="font-size: 0.8rem; color: #64748b;">${m.regras[0]}</p>
           </div>
           <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
             <button class="btn-action" style="padding: 0.45rem 0.85rem; font-size: 0.8rem;" onclick="abrirVideo(${m.id})">
-              Ver Aula & Regras
+              Ver Aula & Mapa Mental
             </button>
             ${isDone ? '<span style="color:#10b981; font-size:0.75rem; font-weight:700;">Concluído</span>' : ''}
           </div>
@@ -614,54 +982,36 @@
       });
     }
 
-    function extrairIdYoutube(url) {
-      if (!url) return null;
-      url = url.trim();
-      if (url.length === 11 && !url.includes('/')) return url;
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-      const match = url.match(regExp);
-      return (match && match[2].length === 11) ? match[2] : null;
-    }
-
     function abrirVideo(id) {
       const m = DADOS_MODULOS.find(item => item.id === id);
       if (!m) return;
       estado.modAtual = id;
 
-      const ytId = (estado.videosPersonalizados && estado.videosPersonalizados[id]) ? estado.videosPersonalizados[id] : m.yt;
-
       document.getElementById('mv-tag').innerText = `MÓDULO ${String(m.id).padStart(2, '0')}`;
       document.getElementById('mv-titulo').innerText = m.titulo;
       document.getElementById('mv-check').checked = estado.concluidos.includes(id);
 
-      document.getElementById('mv-yt-direct').href = `https://www.youtube.com/watch?v=${ytId}`;
-      document.getElementById('input-yt-url').value = '';
+      document.getElementById('mv-yt-direct').href = `https://www.youtube.com/watch?v=${m.yt}`;
 
       document.getElementById('mv-player').innerHTML = `
-        <iframe src="https://www.youtube.com/embed/${ytId}?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/${m.yt}?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       `;
 
+      // Renderizar o Mapa Mental
+      document.getElementById('mm-raiz').innerText = m.mapa.raiz;
+      const ramosCont = document.getElementById('mm-ramos');
+      ramosCont.innerHTML = m.mapa.ramos.map(r => `
+        <div class="mindmap-node">
+          <div class="mindmap-node-title">${r.titulo}</div>
+          <div class="mindmap-node-desc">${r.desc}</div>
+        </div>
+      `).join('');
+
+      // Regras de Ouro
       const ul = document.getElementById('mv-regras');
       ul.innerHTML = m.regras.map(r => `<li>${r}</li>`).join('');
 
       document.getElementById('modal-video').classList.add('active');
-    }
-
-    function salvarNovoVideo() {
-      const input = document.getElementById('input-yt-url').value;
-      const idVideo = extrairIdYoutube(input);
-
-      if (!idVideo) {
-        alert("Cole um link válido do YouTube (ex: https://youtu.be/...)");
-        return;
-      }
-
-      if (!estado.videosPersonalizados) estado.videosPersonalizados = {};
-      estado.videosPersonalizados[estado.modAtual] = idVideo;
-
-      salvarDados();
-      abrirVideo(estado.modAtual);
-      alert("Videoaula atualizada com sucesso!");
     }
 
     function fecharVideo() {
@@ -705,9 +1055,9 @@
           <div style="font-size: 0.75rem; font-weight: 700; color: #0284c7; margin-bottom: 0.4rem;">
             ${q.banca} • ${q.ano}
           </div>
-          <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.75rem;">${q.enunciado}</p>
+          <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.75rem; white-space: pre-line;">${q.enunciado}</p>
           <div>${opts}</div>
-          ${resp ? `<div style="margin-top: 0.85rem; padding: 0.75rem; background: #f8fafc; border-left: 3px solid #0284c7; border-radius: 0.4rem; font-size: 0.85rem;"><strong>Explicação:</strong> ${q.comentario}</div>` : ''}
+          ${resp ? `<div style="margin-top: 0.85rem; padding: 0.75rem; background: #f8fafc; border-left: 3px solid #0284c7; border-radius: 0.4rem; font-size: 0.85rem;"><strong>Comentário do Professor:</strong> ${q.comentario}</div>` : ''}
         `;
         cont.appendChild(card);
       });
@@ -744,7 +1094,7 @@
         div.className = 'q-card';
         div.innerHTML = `
           <div style="font-size: 0.75rem; font-weight: 700; color: #ef4444; margin-bottom: 0.4rem;">${q.banca} • Erro para Revisão</div>
-          <p style="font-weight: 600; font-size: 0.95rem;">${q.enunciado}</p>
+          <p style="font-weight: 600; font-size: 0.95rem; white-space: pre-line;">${q.enunciado}</p>
           <div style="margin-top: 0.75rem; font-size: 0.85rem; background: #ecfdf5; padding: 0.5rem 0.75rem; border-radius: 0.5rem; color: #065f46;">
             <strong>Resposta Correta:</strong> ${q.gabarito}
           </div>
